@@ -1,0 +1,134 @@
+﻿@page "/crearInstitucion"
+@using MyStudentsApp.Shared.DTOShared
+@using System.Text.Json
+@using System.Text
+@inject NavigationManager Navigation;
+
+<div class="card p-3">
+<div class="mb-3">
+	<label for="exampleFormControlInput1" class="form-label">Nombre de La institución</label>
+	<input type="text" class="form-control" id="nombre" placeholders="ACENTO" @bind="escuelaCreacion.nombre">
+</div>
+
+<div class="input-group mb-3">
+  <span class="input-group-text" id="basic-addon1">#</span>
+  <input type="tel" class="form-control" @bind="escuelaCreacion.numero" placeholder="Numero de contacto de la institucion" aria-label="Username" aria-describedby="basic-addon1">
+</div>
+
+<div class="form-floating mb-3">
+        <input type="text" class="form-control" id="floatingInput" @bind="escuelaCreacion.direccion" placeholder="Calle 12, avenida Texas">
+  <label for="floatingInput">Direccion de la institucion</label>
+</div>
+
+    <div class="d-grid">
+    <label for="exampleFormControlInput1" class="form-label">Email del director</label>
+<div class="input-group mb-3">
+            <input type="text" class="form-control" @bind="escuelaCreacion.Email" placeholder="CorreoElectronico@gmail.com" aria-label="Escribe el email de contacto" aria-describedby="basic-addon2">
+	<span class="input-group-text" id="">example.com</span>
+</div>
+    </div>
+
+
+<div class="input-group mb-3">
+  <span class="input-group-text" id="basic-addon1">@@</span>
+        <input type="text" class="form-control" @bind="escuelaCreacion.UserName" placeholder="Nombre del Director" aria-label="Username" aria-describedby="basic-addon1">
+</div>
+
+    <div class="form-floating">
+        <input type="password" @bind="escuelaCreacion.contrasena" class="form-control" id="password" placeholder="Password">
+        <label for="floatingPassword">Password de la cuenta</label>
+    </div>
+
+<button type="button" class="btn btn-primary mt-3"
+        style="--bs-btn-padding-y: .25rem; --bs-btn-padding-x: .5rem; --bs-btn-font-size: .75rem;"
+            @onclick="crearEscuela">
+    Agregar Institución y Director
+</button>
+
+@if (badrequest)
+{
+	<div class="alert alert-danger" role="alert">
+		Hubo un error, por favor intentalo de nuevo
+	</div>
+}
+</div>
+@code {
+    public bool badrequest = false;
+    public bool isLoading = true; // Agregar flag de carga
+    UsuarioEspecialRequestDTO escuelaCreacion = new();
+    List<ProfesorResponseDTO> directores = new(); // Ya está inicializada vacía
+    JsonSerializerOptions _serializerOptions;
+    private HttpClient _httpClient;
+
+    public async Task crearEscuela()
+    {
+        escuelaCreacion.isStudent = false;
+        escuelaCreacion.isAdministrativo = true;
+        if (await CrearEscuela(escuelaCreacion))
+        {
+            Navigation.NavigateTo("/");
+        }
+        else
+        {
+            badrequest = true;
+        }
+    }
+
+    protected override async Task OnInitializedAsync()
+    {
+        _httpClient = new HttpClient();
+        _serializerOptions = new JsonSerializerOptions
+        {
+            WriteIndented = true
+        };
+        _httpClient.BaseAddress = new Uri("https://localhost:7224/api/GestionUsuarios/");
+        isLoading = false; // Marcar como cargado
+        directores = await obtenerDirectores();
+
+        StateHasChanged(); // Forzar re-renderizado
+    }
+
+    public async Task<bool> CrearEscuela(UsuarioEspecialRequestDTO escuela)
+    {
+        var content = new StringContent(JsonSerializer.Serialize(escuela), Encoding.UTF8, "application/json");
+        var resp = await _httpClient.PostAsync("crearUsuarioEspecial", content);
+
+        if (resp.IsSuccessStatusCode)
+        {
+            using (Stream con = await resp.Content.ReadAsStreamAsync())
+            {
+                UsuarioResponseDto respuesta = await JsonSerializer.DeserializeAsync<UsuarioResponseDto>(con, _serializerOptions);
+                return true;
+            }
+        }
+        else
+        {
+            return false;
+        }
+    }
+
+    public async Task<List<ProfesorResponseDTO>> obtenerDirectores()
+    {
+        List<ProfesorResponseDTO> escuelas = new List<ProfesorResponseDTO>();
+
+        var resp = await _httpClient.GetAsync($"obtenerDirectores");
+        var content = await resp.Content.ReadAsStringAsync();
+        Console.WriteLine($"Status: {resp.StatusCode}, Body: {content}");
+
+        if (resp.IsSuccessStatusCode)
+        {
+            using (Stream contentStream = await resp.Content.ReadAsStreamAsync())
+            {
+                try
+                {
+                    escuelas = await JsonSerializer.DeserializeAsync<List<ProfesorResponseDTO>>(contentStream, _serializerOptions);
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine(ex.ToString());
+                }
+            }
+        }
+        return escuelas; // Ensure a return statement is present in all code paths
+    }
+}

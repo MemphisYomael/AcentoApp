@@ -1,0 +1,247 @@
+{
+  "Version": 1,
+  "WorkspaceRootPath": "C:\\Users\\Usuario\\Desktop\\personal\\MyStudentsApp\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{FA84045D-27DF-4DCB-B167-C2854D69250F}|MyStudentsApp\\MyStudentsApp.csproj|c:\\users\\usuario\\desktop\\personal\\mystudentsapp\\mystudentsapp\\services\\chatservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{FA84045D-27DF-4DCB-B167-C2854D69250F}|MyStudentsApp\\MyStudentsApp.csproj|solutionrelative:mystudentsapp\\services\\chatservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{FA84045D-27DF-4DCB-B167-C2854D69250F}|MyStudentsApp\\MyStudentsApp.csproj|c:\\users\\usuario\\desktop\\personal\\mystudentsapp\\mystudentsapp\\mvvm\\views\\chatzoneview.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{FA84045D-27DF-4DCB-B167-C2854D69250F}|MyStudentsApp\\MyStudentsApp.csproj|solutionrelative:mystudentsapp\\mvvm\\views\\chatzoneview.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{FA84045D-27DF-4DCB-B167-C2854D69250F}|MyStudentsApp\\MyStudentsApp.csproj|c:\\users\\usuario\\desktop\\personal\\mystudentsapp\\mystudentsapp\\mvvm\\views\\listadoestudiantesprofesores.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{FA84045D-27DF-4DCB-B167-C2854D69250F}|MyStudentsApp\\MyStudentsApp.csproj|solutionrelative:mystudentsapp\\mvvm\\views\\listadoestudiantesprofesores.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{FA84045D-27DF-4DCB-B167-C2854D69250F}|MyStudentsApp\\MyStudentsApp.csproj|c:\\users\\usuario\\desktop\\personal\\mystudentsapp\\mystudentsapp\\mvvm\\views\\chatzoneview.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}",
+      "RelativeMoniker": "D:0:0:{FA84045D-27DF-4DCB-B167-C2854D69250F}|MyStudentsApp\\MyStudentsApp.csproj|solutionrelative:mystudentsapp\\mvvm\\views\\chatzoneview.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{FA84045D-27DF-4DCB-B167-C2854D69250F}|MyStudentsApp\\MyStudentsApp.csproj|c:\\users\\usuario\\desktop\\personal\\mystudentsapp\\mystudentsapp\\mauiprogram.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{FA84045D-27DF-4DCB-B167-C2854D69250F}|MyStudentsApp\\MyStudentsApp.csproj|solutionrelative:mystudentsapp\\mauiprogram.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{FA84045D-27DF-4DCB-B167-C2854D69250F}|MyStudentsApp\\MyStudentsApp.csproj|c:\\users\\usuario\\desktop\\personal\\mystudentsapp\\mystudentsapp\\mvvm\\viewmodels\\listadodeestudiantesviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{FA84045D-27DF-4DCB-B167-C2854D69250F}|MyStudentsApp\\MyStudentsApp.csproj|solutionrelative:mystudentsapp\\mvvm\\viewmodels\\listadodeestudiantesviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{FA84045D-27DF-4DCB-B167-C2854D69250F}|MyStudentsApp\\MyStudentsApp.csproj|c:\\users\\usuario\\desktop\\personal\\mystudentsapp\\mystudentsapp\\mvvm\\viewmodels\\crearprofesorviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{FA84045D-27DF-4DCB-B167-C2854D69250F}|MyStudentsApp\\MyStudentsApp.csproj|solutionrelative:mystudentsapp\\mvvm\\viewmodels\\crearprofesorviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{FA84045D-27DF-4DCB-B167-C2854D69250F}|MyStudentsApp\\MyStudentsApp.csproj|c:\\users\\usuario\\desktop\\personal\\mystudentsapp\\mystudentsapp\\appmainshell.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{FA84045D-27DF-4DCB-B167-C2854D69250F}|MyStudentsApp\\MyStudentsApp.csproj|solutionrelative:mystudentsapp\\appmainshell.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{FA84045D-27DF-4DCB-B167-C2854D69250F}|MyStudentsApp\\MyStudentsApp.csproj|c:\\users\\usuario\\desktop\\personal\\mystudentsapp\\mystudentsapp\\mvvm\\views\\formularios\\crearprofesorview.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{FA84045D-27DF-4DCB-B167-C2854D69250F}|MyStudentsApp\\MyStudentsApp.csproj|solutionrelative:mystudentsapp\\mvvm\\views\\formularios\\crearprofesorview.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{FA84045D-27DF-4DCB-B167-C2854D69250F}|MyStudentsApp\\MyStudentsApp.csproj|c:\\users\\usuario\\desktop\\personal\\mystudentsapp\\mystudentsapp\\mvvm\\views\\vista.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}",
+      "RelativeMoniker": "D:0:0:{FA84045D-27DF-4DCB-B167-C2854D69250F}|MyStudentsApp\\MyStudentsApp.csproj|solutionrelative:mystudentsapp\\mvvm\\views\\vista.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{FA84045D-27DF-4DCB-B167-C2854D69250F}|MyStudentsApp\\MyStudentsApp.csproj|c:\\users\\usuario\\desktop\\personal\\mystudentsapp\\mystudentsapp\\mvvm\\views\\vista.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{FA84045D-27DF-4DCB-B167-C2854D69250F}|MyStudentsApp\\MyStudentsApp.csproj|solutionrelative:mystudentsapp\\mvvm\\views\\vista.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{FA84045D-27DF-4DCB-B167-C2854D69250F}|MyStudentsApp\\MyStudentsApp.csproj|c:\\users\\usuario\\desktop\\personal\\mystudentsapp\\mystudentsapp\\mvvm\\viewmodels\\crearestudianteviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{FA84045D-27DF-4DCB-B167-C2854D69250F}|MyStudentsApp\\MyStudentsApp.csproj|solutionrelative:mystudentsapp\\mvvm\\viewmodels\\crearestudianteviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{507E214A-BD78-4C2E-9F96-E1EA589A4BB0}|MyStudentsApp.Shared\\MyStudentsApp.Shared.csproj|c:\\users\\usuario\\desktop\\personal\\mystudentsapp\\mystudentsapp.shared\\dtoshared\\estudiantecreaciondto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{507E214A-BD78-4C2E-9F96-E1EA589A4BB0}|MyStudentsApp.Shared\\MyStudentsApp.Shared.csproj|solutionrelative:mystudentsapp.shared\\dtoshared\\estudiantecreaciondto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{507E214A-BD78-4C2E-9F96-E1EA589A4BB0}|MyStudentsApp.Shared\\MyStudentsApp.Shared.csproj|c:\\users\\usuario\\desktop\\personal\\mystudentsapp\\mystudentsapp.shared\\dtoshared\\profesorcreardto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{507E214A-BD78-4C2E-9F96-E1EA589A4BB0}|MyStudentsApp.Shared\\MyStudentsApp.Shared.csproj|solutionrelative:mystudentsapp.shared\\dtoshared\\profesorcreardto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    }
+  ],
+  "DocumentGroupContainers": [
+    {
+      "Orientation": 0,
+      "VerticalTabListWidth": 256,
+      "DocumentGroups": [
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": 1,
+          "Children": [
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "MauiProgram.cs",
+              "DocumentMoniker": "C:\\Users\\Usuario\\Desktop\\personal\\MyStudentsApp\\MyStudentsApp\\MauiProgram.cs",
+              "RelativeDocumentMoniker": "MyStudentsApp\\MauiProgram.cs",
+              "ToolTip": "C:\\Users\\Usuario\\Desktop\\personal\\MyStudentsApp\\MyStudentsApp\\MauiProgram.cs",
+              "RelativeToolTip": "MyStudentsApp\\MauiProgram.cs",
+              "ViewState": "AgIAABwAAAAAAAAAAAAAACMAAAA1AAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-07-18T23:49:57.021Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "ChatService.cs",
+              "DocumentMoniker": "C:\\Users\\Usuario\\Desktop\\personal\\MyStudentsApp\\MyStudentsApp\\Services\\ChatService.cs",
+              "RelativeDocumentMoniker": "MyStudentsApp\\Services\\ChatService.cs",
+              "ToolTip": "C:\\Users\\Usuario\\Desktop\\personal\\MyStudentsApp\\MyStudentsApp\\Services\\ChatService.cs",
+              "RelativeToolTip": "MyStudentsApp\\Services\\ChatService.cs",
+              "ViewState": "AgIAAFUAAAAAAAAAAAAAAFgAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-07-18T17:22:53.586Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "ChatZoneView.xaml",
+              "DocumentMoniker": "C:\\Users\\Usuario\\Desktop\\personal\\MyStudentsApp\\MyStudentsApp\\MVVM\\Views\\ChatZoneView.xaml",
+              "RelativeDocumentMoniker": "MyStudentsApp\\MVVM\\Views\\ChatZoneView.xaml",
+              "ToolTip": "C:\\Users\\Usuario\\Desktop\\personal\\MyStudentsApp\\MyStudentsApp\\MVVM\\Views\\ChatZoneView.xaml",
+              "RelativeToolTip": "MyStudentsApp\\MVVM\\Views\\ChatZoneView.xaml",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAIAAABDAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003549|",
+              "WhenOpened": "2025-07-17T23:48:26.135Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "ListadoDeEstudiantesViewModel.cs",
+              "DocumentMoniker": "C:\\Users\\Usuario\\Desktop\\personal\\MyStudentsApp\\MyStudentsApp\\MVVM\\ViewModels\\ListadoDeEstudiantesViewModel.cs",
+              "RelativeDocumentMoniker": "MyStudentsApp\\MVVM\\ViewModels\\ListadoDeEstudiantesViewModel.cs",
+              "ToolTip": "C:\\Users\\Usuario\\Desktop\\personal\\MyStudentsApp\\MyStudentsApp\\MVVM\\ViewModels\\ListadoDeEstudiantesViewModel.cs",
+              "RelativeToolTip": "MyStudentsApp\\MVVM\\ViewModels\\ListadoDeEstudiantesViewModel.cs",
+              "ViewState": "AgIAANkBAAAAAAAAAADwv+IBAAAnAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-07-17T23:27:40.924Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "ListadoEstudiantesProfesores.cs",
+              "DocumentMoniker": "C:\\Users\\Usuario\\Desktop\\personal\\MyStudentsApp\\MyStudentsApp\\MVVM\\Views\\ListadoEstudiantesProfesores.cs",
+              "RelativeDocumentMoniker": "MyStudentsApp\\MVVM\\Views\\ListadoEstudiantesProfesores.cs",
+              "ToolTip": "C:\\Users\\Usuario\\Desktop\\personal\\MyStudentsApp\\MyStudentsApp\\MVVM\\Views\\ListadoEstudiantesProfesores.cs",
+              "RelativeToolTip": "MyStudentsApp\\MVVM\\Views\\ListadoEstudiantesProfesores.cs",
+              "ViewState": "AgIAAHIAAAAAAAAAAAAnwHwAAABJAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-07-15T17:52:35.041Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "ChatZoneView.xaml.cs",
+              "DocumentMoniker": "C:\\Users\\Usuario\\Desktop\\personal\\MyStudentsApp\\MyStudentsApp\\MVVM\\Views\\ChatZoneView.xaml.cs",
+              "RelativeDocumentMoniker": "MyStudentsApp\\MVVM\\Views\\ChatZoneView.xaml.cs",
+              "ToolTip": "C:\\Users\\Usuario\\Desktop\\personal\\MyStudentsApp\\MyStudentsApp\\MVVM\\Views\\ChatZoneView.xaml.cs",
+              "RelativeToolTip": "MyStudentsApp\\MVVM\\Views\\ChatZoneView.xaml.cs",
+              "ViewState": "AgIAAAQAAAAAAAAAAAAswAkAAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-07-15T17:51:41.813Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 10,
+              "Title": "vista.xaml.cs",
+              "DocumentMoniker": "C:\\Users\\Usuario\\Desktop\\personal\\MyStudentsApp\\MyStudentsApp\\MVVM\\Views\\vista.xaml.cs",
+              "RelativeDocumentMoniker": "MyStudentsApp\\MVVM\\Views\\vista.xaml.cs",
+              "ToolTip": "C:\\Users\\Usuario\\Desktop\\personal\\MyStudentsApp\\MyStudentsApp\\MVVM\\Views\\vista.xaml.cs",
+              "RelativeToolTip": "MyStudentsApp\\MVVM\\Views\\vista.xaml.cs",
+              "ViewState": "AgIAACUAAAAAAAAAAAAQwEYAAAAcAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-07-15T13:25:55.157Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 9,
+              "Title": "vista.xaml",
+              "DocumentMoniker": "C:\\Users\\Usuario\\Desktop\\personal\\MyStudentsApp\\MyStudentsApp\\MVVM\\Views\\vista.xaml",
+              "RelativeDocumentMoniker": "MyStudentsApp\\MVVM\\Views\\vista.xaml",
+              "ToolTip": "C:\\Users\\Usuario\\Desktop\\personal\\MyStudentsApp\\MyStudentsApp\\MVVM\\Views\\vista.xaml",
+              "RelativeToolTip": "MyStudentsApp\\MVVM\\Views\\vista.xaml",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABEAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003549|",
+              "WhenOpened": "2025-07-15T13:25:53.216Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 8,
+              "Title": "CrearProfesorView.cs",
+              "DocumentMoniker": "C:\\Users\\Usuario\\Desktop\\personal\\MyStudentsApp\\MyStudentsApp\\MVVM\\Views\\Formularios\\CrearProfesorView.cs",
+              "RelativeDocumentMoniker": "MyStudentsApp\\MVVM\\Views\\Formularios\\CrearProfesorView.cs",
+              "ToolTip": "C:\\Users\\Usuario\\Desktop\\personal\\MyStudentsApp\\MyStudentsApp\\MVVM\\Views\\Formularios\\CrearProfesorView.cs",
+              "RelativeToolTip": "MyStudentsApp\\MVVM\\Views\\Formularios\\CrearProfesorView.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA8AAAAlAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-07-15T00:37:02.766Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 7,
+              "Title": "AppMainShell.xaml.cs",
+              "DocumentMoniker": "C:\\Users\\Usuario\\Desktop\\personal\\MyStudentsApp\\MyStudentsApp\\AppMainShell.xaml.cs",
+              "RelativeDocumentMoniker": "MyStudentsApp\\AppMainShell.xaml.cs",
+              "ToolTip": "C:\\Users\\Usuario\\Desktop\\personal\\MyStudentsApp\\MyStudentsApp\\AppMainShell.xaml.cs",
+              "RelativeToolTip": "MyStudentsApp\\AppMainShell.xaml.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAwAAAAcAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-07-15T00:30:48.909Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 12,
+              "Title": "EstudianteCreacionDTO.cs",
+              "DocumentMoniker": "C:\\Users\\Usuario\\Desktop\\personal\\MyStudentsApp\\MyStudentsApp.Shared\\DTOShared\\EstudianteCreacionDTO.cs",
+              "RelativeDocumentMoniker": "MyStudentsApp.Shared\\DTOShared\\EstudianteCreacionDTO.cs",
+              "ToolTip": "C:\\Users\\Usuario\\Desktop\\personal\\MyStudentsApp\\MyStudentsApp.Shared\\DTOShared\\EstudianteCreacionDTO.cs",
+              "RelativeToolTip": "MyStudentsApp.Shared\\DTOShared\\EstudianteCreacionDTO.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAwAAAAuAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-07-14T12:03:39.656Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 13,
+              "Title": "ProfesorCrearDTO.cs",
+              "DocumentMoniker": "C:\\Users\\Usuario\\Desktop\\personal\\MyStudentsApp\\MyStudentsApp.Shared\\DTOShared\\ProfesorCrearDTO.cs",
+              "RelativeDocumentMoniker": "MyStudentsApp.Shared\\DTOShared\\ProfesorCrearDTO.cs",
+              "ToolTip": "C:\\Users\\Usuario\\Desktop\\personal\\MyStudentsApp\\MyStudentsApp.Shared\\DTOShared\\ProfesorCrearDTO.cs",
+              "RelativeToolTip": "MyStudentsApp.Shared\\DTOShared\\ProfesorCrearDTO.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA0AAAAnAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-07-14T11:56:08.24Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 6,
+              "Title": "CrearProfesorViewModel.cs",
+              "DocumentMoniker": "C:\\Users\\Usuario\\Desktop\\personal\\MyStudentsApp\\MyStudentsApp\\MVVM\\ViewModels\\CrearProfesorViewModel.cs",
+              "RelativeDocumentMoniker": "MyStudentsApp\\MVVM\\ViewModels\\CrearProfesorViewModel.cs",
+              "ToolTip": "C:\\Users\\Usuario\\Desktop\\personal\\MyStudentsApp\\MyStudentsApp\\MVVM\\ViewModels\\CrearProfesorViewModel.cs",
+              "RelativeToolTip": "MyStudentsApp\\MVVM\\ViewModels\\CrearProfesorViewModel.cs",
+              "ViewState": "AgIAACIAAAAAAAAAAAAhwC0AAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-07-13T20:53:47.591Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 11,
+              "Title": "CrearEstudianteViewModel.cs",
+              "DocumentMoniker": "C:\\Users\\Usuario\\Desktop\\personal\\MyStudentsApp\\MyStudentsApp\\MVVM\\ViewModels\\CrearEstudianteViewModel.cs",
+              "RelativeDocumentMoniker": "MyStudentsApp\\MVVM\\ViewModels\\CrearEstudianteViewModel.cs",
+              "ToolTip": "C:\\Users\\Usuario\\Desktop\\personal\\MyStudentsApp\\MyStudentsApp\\MVVM\\ViewModels\\CrearEstudianteViewModel.cs",
+              "RelativeToolTip": "MyStudentsApp\\MVVM\\ViewModels\\CrearEstudianteViewModel.cs",
+              "ViewState": "AgIAABoAAAAAAAAAAAAgwCoAAAANAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-07-13T20:25:10.762Z",
+              "EditorCaption": ""
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

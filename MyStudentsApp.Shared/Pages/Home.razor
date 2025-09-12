@@ -1,0 +1,421 @@
+﻿@page "/"
+@using MyStudentsApp.Shared.DTOShared
+@using System.Text.Json
+@inject NavigationManager Navigation
+
+<PageTitle>Escuelas</PageTitle>
+
+<div class="container-fluid py-4">
+    <!-- Header Section -->
+    <div class="row mb-4">
+        <div class="col-12">
+            <div class="bg-primary text-white rounded-3 p-4 shadow">
+                <h1 class="display-4 mb-2">
+                    <i class="fas fa-school me-3"></i>
+                    Panel de Escuelas
+                </h1>
+                <p class="lead mb-0">Gestiona y supervisa todas las instituciones educativas</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Stats Cards -->
+    <div class="row mb-4">
+        <div class="col-md-3 col-sm-6 mb-3">
+            <div class="card bg-success text-white h-100">
+                <div class="card-body d-flex align-items-center">
+                    <div class="flex-grow-1">
+                        <h3 class="card-title mb-0">@(escuelas?.Count ?? 0)</h3>
+                        <p class="card-text small mb-0">Total Escuelas</p>
+                    </div>
+                    <div class="ms-3">
+                        <i class="fas fa-building fa-2x opacity-75"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3 col-sm-6 mb-3">
+            <div class="card bg-info text-white h-100">
+                <div class="card-body d-flex align-items-center">
+                    <div class="flex-grow-1">
+                        <h3 class="card-title mb-0">@(escuelas?.Select(e => e.directorId).Distinct().Count() ?? 0)</h3>
+                        <p class="card-text small mb-0">Directores</p>
+                    </div>
+                    <div class="ms-3">
+                        <i class="fas fa-users fa-2x opacity-75"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3 col-sm-6 mb-3">
+            <div class="card bg-warning text-white h-100">
+                <div class="card-body d-flex align-items-center">
+                    <div class="flex-grow-1">
+                        <h3 class="card-title mb-0">100%</h3>
+                        <p class="card-text small mb-0">Disponibilidad</p>
+                    </div>
+                    <div class="ms-3">
+                        <i class="fas fa-chart-line fa-2x opacity-75"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3 col-sm-6 mb-3">
+            <div class="card bg-danger text-white h-100">
+                <div class="card-body d-flex align-items-center">
+                    <div class="flex-grow-1">
+                        <h3 class="card-title mb-0">24/7</h3>
+                        <p class="card-text small mb-0">Soporte</p>
+                    </div>
+                    <div class="ms-3">
+                        <i class="fas fa-headset fa-2x opacity-75"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    @if (escuelas == null)
+    {
+        <!-- Loading State -->
+        <div class="row">
+            <div class="col-12">
+                <div class="card">
+                    <div class="card-body text-center py-5">
+                        <div class="spinner-border text-primary mb-3" role="status">
+                            <span class="visually-hidden">Cargando...</span>
+                        </div>
+                        <p class="text-muted">Cargando escuelas...</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    }
+    else if (escuelas.Count == 0)
+    {
+        <!-- Empty State -->
+        <div class="row">
+            <div class="col-12">
+                <div class="card">
+                    <div class="card-body text-center py-5">
+                        <i class="fas fa-school fa-3x text-muted mb-3"></i>
+                        <h4 class="text-muted">No hay escuelas registradas</h4>
+                        <p class="text-muted">Agrega tu primera escuela para comenzar</p>
+                        <button class="btn btn-primary" @onclick="NavigateToCreateSchool">
+                            <i class="fas fa-plus me-2"></i>
+                            Crear Primera Escuela
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    }
+    else
+    {
+        <!-- Schools Grid -->
+        <div class="row">
+            <div class="col-12 mb-3">
+                <div class="d-flex justify-content-between align-items-center flex-wrap gap-2">
+                    <h2 class="h4 mb-0">
+                        <i class="fas fa-list me-2"></i>
+                        Escuelas Registradas
+                    </h2>
+                    <div class="d-flex gap-2">
+                        <button type="button" class="btn btn-success" @onclick="NavigateToCreateSchool">
+                            <i class="fas fa-plus me-2"></i>
+                            Crear Escuela
+                        </button>
+                        <div class="btn-group" role="group">
+                            <button type="button" class="btn btn-outline-secondary btn-sm active">
+                                <i class="fas fa-th"></i>
+                            </button>
+                            <button type="button" class="btn btn-outline-secondary btn-sm">
+                                <i class="fas fa-list"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row g-3 g-lg-4">
+            @foreach (var escuela in escuelas)
+            {
+                <div class="col-xl-4 col-lg-6 col-md-6 col-12">
+                    <div class="card h-100 shadow-sm border-0 hover-shadow">
+                        <div class="card-header bg-gradient-primary text-white position-relative p-4">
+                            <div class="position-absolute top-0 end-0 p-3">
+                                <span class="badge bg-success bg-opacity-75">
+                                    <i class="fas fa-check-circle me-1"></i>
+                                    Activa
+                                </span>
+                            </div>
+                            <div class="text-center">
+                                <div class="school-icon mb-3">
+                                    <i class="fas fa-university fa-3x text-white opacity-90"></i>
+                                </div>
+                                <h5 class="card-title text-white mb-0 fw-bold">
+                                    @escuela.nombre
+                                </h5>
+                            </div>
+                        </div>
+
+                        <div class="card-body d-flex flex-column p-4">
+
+
+                            <div class="mb-4 flex-grow-1">
+                                <div class="row g-3">
+                                    <div class="col-12">
+                                        <div class="d-flex align-items-center p-2 bg-white rounded shadow-sm">
+                                            <div class="flex-shrink-0 me-3">
+                                                <div class="icon-circle bg-primary">
+                                                    <i class="fas fa-hashtag text-white"></i>
+                                                </div>
+                                            </div>
+                                            <div class="flex-grow-1">
+                                                <div class="small text-muted mb-1">ID Escuela</div>
+                                                <div class="fw-medium">@escuela.escuelaId</div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-12">
+                                        <div class="d-flex align-items-center p-2 bg-white rounded shadow-sm">
+                                            <div class="flex-shrink-0 me-3">
+                                                <div class="icon-circle bg-success">
+                                                    <i class="fas fa-phone text-white"></i>
+                                                </div>
+                                            </div>
+                                            <div class="flex-grow-1">
+                                                <div class="small text-muted mb-1">Teléfono</div>
+                                                <div class="fw-medium">
+                                                    <a href="tel:@escuela.numero" class="text-decoration-none text-dark">@escuela.numero</a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-12">
+                                        <div class="d-flex align-items-center p-2 bg-white rounded shadow-sm">
+                                            <div class="flex-shrink-0 me-3">
+                                                <div class="icon-circle bg-warning">
+                                                    <i class="fas fa-user-tie text-white"></i>
+                                                </div>
+                                            </div>
+                                            <div class="flex-grow-1">
+                                                <div class="small text-muted mb-1">Director</div>
+                                                <div class="fw-medium">@escuela.directorName</div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-12">
+                                        <div class="d-flex align-items-center p-2 bg-white rounded shadow-sm">
+                                            <div class="flex-shrink-0 me-3">
+                                                <div class="icon-circle bg-info">
+                                                    <i class="fas fa-id-badge text-white"></i>
+                                                </div>
+                                            </div>
+                                            <div class="flex-grow-1">
+                                                <div class="small text-muted mb-1">ID Director</div>
+                                                <div class="fw-medium">@escuela.directorId</div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="mt-auto">
+                                <div class="d-grid gap-2">
+                                    <button class="btn btn-primary btn-sm">
+                                        <i class="fas fa-eye me-2"></i>
+                                        Ver Detalles
+                                    </button>
+                                    <div class="btn-group" role="group">
+                                        <button type="button" class="btn btn-outline-secondary btn-sm">
+                                            <i class="fas fa-edit"></i>
+                                        </button>
+                                        <button type="button" class="btn btn-outline-info btn-sm">
+                                            <i class="fas fa-users"></i>
+                                        </button>
+                                        <button type="button" class="btn btn-outline-success btn-sm">
+                                            <i class="fas fa-chart-bar"></i>
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+    }
+</div>
+
+<style>
+    .bg-gradient-primary {
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    }
+
+    .hover-shadow {
+        transition: all 0.3s ease;
+        border-radius: 15px;
+        overflow: hidden;
+    }
+
+        .hover-shadow:hover {
+            box-shadow: 0 15px 35px rgba(0,0,0,0.1) !important;
+            transform: translateY(-5px);
+        }
+
+    .school-icon {
+        width: 80px;
+        height: 80px;
+        background: rgba(255,255,255,0.1);
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin: 0 auto;
+        backdrop-filter: blur(10px);
+        border: 2px solid rgba(255,255,255,0.2);
+    }
+
+    .card-header {
+        border-radius: 15px 15px 0 0 !important;
+    }
+
+    .btn-group .btn {
+        border-radius: 8px !important;
+    }
+
+    .btn-success {
+        background: linear-gradient(135deg, #28a745 0%, #20c997 100%);
+        border: none;
+        border-radius: 8px;
+        font-weight: 500;
+        transition: all 0.3s ease;
+    }
+
+        .btn-success:hover {
+            background: linear-gradient(135deg, #218838 0%, #1ea085 100%);
+            transform: translateY(-1px);
+            box-shadow: 0 4px 15px rgba(40, 167, 69, 0.3);
+        }
+
+    .btn-primary {
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        border: none;
+        border-radius: 8px;
+    }
+
+        .btn-primary:hover {
+            background: linear-gradient(135deg, #5a6fd8 0%, #6a4190 100%);
+            transform: translateY(-1px);
+        }
+
+    .badge {
+        border-radius: 10px;
+        font-size: 0.75rem;
+    }
+
+    .icon-circle {
+        width: 35px;
+        height: 35px;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 0.8rem;
+    }
+
+    .card-body {
+        background: rgba(248,249,250,0.5);
+    }
+
+    @@media (max-width: 576px) {
+        .container-fluid
+
+    {
+        padding-left: 10px;
+        padding-right: 10px;
+    }
+
+    .card-header {
+        padding: 1.5rem !important;
+    }
+
+    .school-icon {
+        width: 60px;
+        height: 60px;
+    }
+
+        .school-icon i {
+            font-size: 1.5rem !important;
+        }
+
+    .d-flex.justify-content-between {
+        flex-direction: column;
+        gap: 1rem;
+    }
+
+    .btn-success {
+        width: 100%;
+        order: -1;
+    }
+
+    }
+</style>
+
+@code {
+    List<EscuelaResponseDto> escuelas;
+    JsonSerializerOptions _serializerOptions;
+    private HttpClient _httpClient;
+    protected override async Task OnInitializedAsync()
+    {
+        _httpClient = new HttpClient();
+        _serializerOptions = new JsonSerializerOptions
+        {
+            WriteIndented = true
+        };
+        _httpClient.BaseAddress = new Uri("https://localhost:7224/api/GestionUsuarios/");
+        try
+        {
+            escuelas = await obtenerEscuelasAsync("All");
+            StateHasChanged();
+        }
+        catch (Exception ex)
+        {
+            // Manejar error - podrías agregar logging aquí
+            escuelas = new List<EscuelaResponseDto>();
+            StateHasChanged();
+        }
+    }
+
+    public async Task<List<EscuelaResponseDto>> obtenerEscuelasAsync(string nombre = "All")
+    {
+        List<EscuelaResponseDto> escuelas = new List<EscuelaResponseDto>();
+
+        var resp = await _httpClient.GetAsync($"obtenerEscuelas?nombre={nombre}");
+        var content = await resp.Content.ReadAsStringAsync();
+        Console.WriteLine($"Status: {resp.StatusCode}, Body: {content}");
+
+        if (resp.IsSuccessStatusCode)
+        {
+            using (Stream contentStream = await resp.Content.ReadAsStreamAsync())
+            {
+                try
+                {
+                    escuelas = await JsonSerializer.DeserializeAsync<List<EscuelaResponseDto>>(contentStream, _serializerOptions);
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine(ex.ToString());
+                }
+            }
+        }
+        return escuelas;
+    }
+
+    private void NavigateToCreateSchool()
+    {
+        Navigation.NavigateTo("/crearInstitucion");
+    }
+}

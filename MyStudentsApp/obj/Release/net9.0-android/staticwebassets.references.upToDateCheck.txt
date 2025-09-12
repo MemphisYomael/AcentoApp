@@ -1,0 +1,13 @@
+C:\Users\Usuario\Desktop\personal\MyStudentsApp\MyStudentsApp.Shared\obj\Debug\net9.0\staticwebassets.build.json
+C:\Users\Usuario\Desktop\personal\MyStudentsApp\MyStudentsApp.Shared\obj\Release\net9.0\staticwebassets.build.json
+C:\Users\Usuario\Desktop\personal\MyStudentsApp\MyStudentsApp.Shared\obj\Release\net9.0\staticwebassets.build.json
+C:\Users\Usuario\Desktop\personal\MyStudentsApp\MyStudentsApp.Shared\obj\Release\net9.0\staticwebassets.build.json
+C:\Users\Usuario\Desktop\personal\MyStudentsApp\MyStudentsApp.Shared\obj\Release\net9.0\staticwebassets.build.json
+C:\Users\Usuario\Desktop\personal\MyStudentsApp\MyStudentsApp.Shared\obj\Release\net9.0\staticwebassets.build.json
+C:\Users\Usuario\Desktop\personal\MyStudentsApp\MyStudentsApp.Shared\obj\Release\net9.0\staticwebassets.build.json
+C:\Users\Usuario\Desktop\personal\MyStudentsApp\MyStudentsApp.Shared\obj\Release\net9.0\staticwebassets.build.json
+C:\Users\Usuario\Desktop\personal\MyStudentsApp\MyStudentsApp.Shared\obj\Release\net9.0\staticwebassets.build.json
+C:\Users\Usuario\Desktop\personal\MyStudentsApp\MyStudentsApp.Shared\obj\Release\net9.0\staticwebassets.build.json
+C:\Users\Usuario\Desktop\personal\MyStudentsApp\MyStudentsApp.Shared\obj\Release\net9.0\staticwebassets.build.json
+C:\Users\Usuario\Desktop\personal\MyStudentsApp\MyStudentsApp.Shared\obj\Release\net9.0\staticwebassets.build.json
+C:\Users\Usuario\Desktop\personal\MyStudentsApp\MyStudentsApp.Shared\obj\Release\net9.0\staticwebassets.build.json

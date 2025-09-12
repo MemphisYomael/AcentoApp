@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="MyStudentsApp.MVVM.Views.vista"
+             xmlns:controls="clr-namespace:MyStudentsApp.MVVM.Models.SkiaControls" 
+             Title="WebView">
+
+
+    <!--<WebView x:Name="webView"
+             Source="https://enumaelish-promo-mysoft.web.app"
+             VerticalOptions="Fill" />-->
+
+    <!--<WebView x:Name="webView"
+             Source="https://mycopilot-4abe8.web.app"
+             VerticalOptions="Fill"
+             HorizontalOptions="Fill">
+    </WebView>-->
+
+    <WebView 
+        Source="https://canvas.unapec.edu.do/"
+        VerticalOptions="Fill"
+        HorizontalOptions="Fill"
+        />
+
+
+</ContentPage>

@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentView xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"             
+             xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
+             x:Class="MyStudentsApp.MVVM.Models.ContentViews.TarjetaUsuarioControl">
+    <Border x:Name="mainBorder"
+            Padding="12"
+            StrokeShape="RoundRectangle 16"
+            HorizontalOptions="Fill">
+        <Border.Shadow>
+            <Shadow Brush="Black"
+                    Opacity="0.12"
+                    Radius="10"
+                    Offset="0,4" />
+        </Border.Shadow>
+        <Grid ColumnDefinitions="Auto,*" ColumnSpacing="12">
+            <toolkit:AvatarView x:Name="avatar"
+                                WidthRequest="50"
+                                HeightRequest="50"
+                                CornerRadius="25"
+                                VerticalOptions="Center"
+                                TextColor="White"
+                                FontAttributes="Bold"
+                                FontSize="18" />
+            <VerticalStackLayout Grid.Column="1"
+                                 VerticalOptions="Center"
+                                 Spacing="2">
+                <Label x:Name="nameLabel"
+                       FontAttributes="Bold"
+                       FontFamily="text"
+                       FontSize="16"
+                       LineBreakMode="TailTruncation" />
+                <Label x:Name="positionLabel"
+                       FontSize="13"
+                       Opacity="0.85"
+                       FontFamily="text"
+                       LineBreakMode="TailTruncation" />
+            </VerticalStackLayout>
+        </Grid>
+    </Border>
+</ContentView>

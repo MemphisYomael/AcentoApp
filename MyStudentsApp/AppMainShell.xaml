@@ -1,0 +1,241 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Shell xmlns="http://schemas.microsoft.com/dotnet/2021/maui"  
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"  
+             xmlns:local="clr-namespace:MyStudentsApp"  
+             xmlns:views="clr-namespace:MyStudentsApp.MVVM.Views"  
+             xmlns:formularios="clr-namespace:MyStudentsApp.MVVM.Views.Formularios"
+             x:Class="MyStudentsApp.AppMainShell"   
+             Title="HI Teacher"     
+             FlyoutIcon="menu_dark.png"
+             FlyoutVerticalScrollMode="Auto"
+             BackgroundColor="#ffffff"
+             Shell.ForegroundColor="Turquoise"
+             Shell.TitleColor="#000000"
+             Shell.UnselectedColor="grey"
+       >
+
+
+    <Shell.TitleView>
+        <Grid ColumnDefinitions=".8*, .2*">
+
+
+            <Label 
+                x:Name="titulo"
+                Text="HiTeacher" 
+                   Grid.Column="0"
+                   HorizontalOptions="Start" 
+                   VerticalOptions="Center" 
+                    FontSize="20"
+                FontFamily="text"
+FontAttributes="Bold"
+                   TextColor="#000000"
+                   />
+
+            <Image Source="acento.png"
+                   Grid.Column="1"
+                   HorizontalOptions="Start" 
+                   VerticalOptions="Center" 
+                   Aspect="AspectFit"
+                   HeightRequest="40"
+                   WidthRequest="40"/>
+        </Grid>
+    </Shell.TitleView>
+
+    <Shell.Resources>
+        <Style TargetType="FlyoutItem">
+            <Setter Property="Shell.TabBarBackgroundColor" Value="#ffffff"/>
+            <Setter Property="Shell.TabBarDisabledColor" Value="#1d1f24"/>
+            <Setter Property="Shell.TabBarForegroundColor" Value="#D040E0"/>
+            <Setter Property="Shell.TabBarTitleColor" Value="Turquoise"/>
+            <Setter Property="Shell.TabBarUnselectedColor" Value="#000000"/>
+        </Style>
+    </Shell.Resources>
+    
+    
+    <!--IF WINDOWS FlyoutBehavior="Locked" -->
+    <!--FlyoutBackgroundImage=""-->
+    <!--FlyoutBackgroundImageAspect="AspectFill"-->
+    <!--FlyoutBackdrop="White"-->
+    <Shell.FlyoutBackdrop>
+        <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
+            <GradientStop Offset="0.1" Color="DarkBlue"></GradientStop>
+            <GradientStop Offset="0.6" Color="Turquoise"></GradientStop>
+
+        </LinearGradientBrush>
+    </Shell.FlyoutBackdrop>
+    <!--<Shell.FlyoutBackdrop>
+        <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
+            <GradientStop Offset="0.1" Color="aqua"></GradientStop>
+            <GradientStop Offset="0.6" Color="#d8bfd8"></GradientStop>
+        </LinearGradientBrush>
+    </Shell.FlyoutBackdrop>-->
+    <Shell.FlyoutHeader>  
+        <Grid BackgroundColor="Black" HeightRequest="200">  
+            <Image Source="imgbg.png"   
+                   HorizontalOptions="Fill"  
+                   VerticalOptions="Fill"  
+                   Aspect="AspectFill"
+                   Opacity="0.7"  
+                 />  
+            <VerticalStackLayout HorizontalOptions="Center" VerticalOptions="Center">
+                <Label Text="👋 HiTeacher"  
+             HorizontalOptions="Center"  
+             VerticalOptions="Center"  
+             FontSize="24"  
+             FontFamily="text"
+             TextColor="White"  
+             FontAttributes="Bold"/>  
+
+                <Label Text="Para una comunicacion efectiva"  
+                  HorizontalOptions="Center"  
+                  VerticalOptions="End"  
+                  FontSize="12"  
+                  TextColor="White" 
+                  FontFamily="text" 
+                />    
+            </VerticalStackLayout>  
+        </Grid>  
+    </Shell.FlyoutHeader>
+    
+    <Shell.FlyoutFooter>
+        <Grid BackgroundColor="White" HeightRequest="60"  Padding="10">
+            <Grid.RowDefinitions>
+                <!--<RowDefinition Height="Auto" />-->
+                <!--<RowDefinition Height="*" />-->
+                <!--<RowDefinition Height="*" />-->
+
+            </Grid.RowDefinitions>
+            <!--<Image Source="mysoftlogo.png" 
+                  HorizontalOptions="Center" 
+                  VerticalOptions="Center" 
+                   Grid.Row="1"
+                 />-->
+            <Label Text="Developed by Mysoft" 
+                
+           HorizontalOptions="Center"
+                   VerticalOptions="Center"
+                   HorizontalTextAlignment="Center"
+                   VerticalTextAlignment="Center"
+                   FontFamily="text"
+           FontSize="14" 
+           TextColor="#000000" 
+          />
+        </Grid>
+    </Shell.FlyoutFooter>
+
+    <Shell.ItemTemplate>
+        <DataTemplate>
+            <HorizontalStackLayout Padding="20" Spacing="10" x:Name="background">
+                <VisualStateManager.VisualStateGroups>
+                    <VisualStateGroupList>
+                        <VisualStateGroup x:Name="CommonStates">
+                            <VisualState x:Name="Normal">
+                                <VisualState.Setters>
+                                    <Setter TargetName="textColor" Property="Label.TextColor" Value="#ffffff"/>
+                                    <Setter TargetName="background" Property="HorizontalStackLayout.BackgroundColor" Value="#000000"/>
+                                </VisualState.Setters>
+                            </VisualState>
+                            <VisualState x:Name="Selected">
+                                <VisualState.Setters>
+                                    <Setter TargetName="textColor" Property="Label.TextColor" Value="#00FFFF"/>
+                                    <Setter TargetName="background" Property="HorizontalStackLayout.BackgroundColor" Value="#1C1C1E" />
+                                </VisualState.Setters>
+                            </VisualState>
+                        </VisualStateGroup>
+                    </VisualStateGroupList>
+                </VisualStateManager.VisualStateGroups>
+                <Image Source="{Binding Icon}" WidthRequest="24" HeightRequest="24"/>
+                <Label x:Name="textColor" Margin="30,0,0,0" Text="{Binding Title}" FontFamily="text" FontSize="18" TextColor="White" FontAttributes="Bold"/>
+            </HorizontalStackLayout>
+        </DataTemplate>
+    </Shell.ItemTemplate>
+    <FlyoutItem Title="Aplication" Icon="home.png" FlyoutDisplayOptions="AsMultipleItems">  
+        <Tab Title="DashBoard" Icon="dashboard.png">  
+            <ShellContent Icon="chat.png" Title="Estudiantes" ContentTemplate="{DataTemplate views:ListadoEstudiantesProfesores }">  
+            </ShellContent>  
+            <ShellContent Icon="settings.png" Title="Gestion" ContentTemplate="{DataTemplate local:MainPage}">  
+            </ShellContent>  
+        </Tab>  
+
+        <Tab Title="Aplication" Icon="home.png" >  
+            <ShellContent Icon="login.png" Title="Login" ContentTemplate="{DataTemplate views:LoginView}">  
+            </ShellContent>  
+            
+        </Tab>  
+    </FlyoutItem>  
+    
+      <FlyoutItem Title="Aplication" Icon="home.png" FlyoutItemIsVisible="False">  
+      <Tab Title="DashBoard" Icon="dashboard.png">  
+          <ShellContent Icon="chat.png" Title="Estudiantes" ContentTemplate="{DataTemplate views:ListadoEstudiantesProfesores }">  
+          </ShellContent>  
+          <ShellContent Icon="settings.png" Title="Gestion" ContentTemplate="{DataTemplate local:MainPage}">  
+          </ShellContent>  
+      </Tab>  
+
+      <Tab Title="Aplication" Icon="home.png" >  
+          <ShellContent Icon="login.png" Title="Login" ContentTemplate="{DataTemplate views:LoginView}">  
+          </ShellContent>  
+          <ShellContent Icon=".png" Title="BETA Tests" ContentTemplate="{DataTemplate views:vista }">  
+          </ShellContent>  
+      </Tab>  
+  </FlyoutItem>  
+
+    <FlyoutItem Title="Gestion de Usuarios" Icon="home.png" FlyoutDisplayOptions="AsSingleItem">  
+        <!--<Tab Title="DashBoard" Icon="dashboard.png">-->
+            <ShellContent Icon="settings.png" Title="Crear Estudiantes" ContentTemplate="{DataTemplate formularios:CrearEstudianteView}">
+            </ShellContent>
+            <ShellContent Icon="settings.png" Title="Crear Profesores" ContentTemplate="{DataTemplate formularios:CrearProfesorView}">
+            </ShellContent>
+        <!--</Tab>-->  
+    </FlyoutItem>
+
+    <ShellContent Icon="homework.png" Title="WEB VIEW" ContentTemplate="{DataTemplate views:vista }">
+    </ShellContent>
+    <!--<FlyoutItem Title="Crear" Icon="home.png">  
+        <Tab Title="DashBoard" Icon="dashboard.png">
+           
+        </Tab>  
+
+        --><!--<Tab Title="Aplication" Icon="home.png">  
+            <ShellContent Icon="login.png" Title="Login" ContentTemplate="{DataTemplate views:LoginView}">  
+            </ShellContent>  
+            <ShellContent Icon=".png" Title="BETA Tests" ContentTemplate="{DataTemplate views:vista }">  
+            </ShellContent>  
+        </Tab>--><!--  
+    </FlyoutItem>-->
+
+    <MenuItem Text="Help" IconImageSource="tests.png" Clicked="MenuItem_Clicked" />
+    <MenuItem Text="Logout"  IconImageSource="tests.png" Clicked="MenuItem_Clicked" />
+
+    <Shell.MenuItemTemplate>
+        <DataTemplate>
+            <HorizontalStackLayout Padding="20" Spacing="10" x:Name="background">
+                <VisualStateManager.VisualStateGroups>
+                    <VisualStateGroupList>
+                        <VisualStateGroup x:Name="CommonStates">
+                            <VisualState x:Name="Normal">
+                                <VisualState.Setters>
+                                    <Setter TargetName="textColor" Property="Label.TextColor" Value="#00FFFF"/>
+                                    <Setter TargetName="background" Property="HorizontalStackLayout.BackgroundColor" Value="#3A3A3C"/>
+                                </VisualState.Setters>
+                            </VisualState>
+                            <VisualState x:Name="Selected">
+                                <VisualState.Setters>
+                                    <Setter TargetName="textColor" Property="Label.TextColor" Value="#00FFFF"/>
+                                    <Setter TargetName="background" Property="HorizontalStackLayout.BackgroundColor" Value="DarkBlue"/>
+                                </VisualState.Setters>
+                            </VisualState>
+                        </VisualStateGroup>
+                    </VisualStateGroupList>
+                </VisualStateManager.VisualStateGroups>
+                <Image Source="{Binding Icon}" WidthRequest="24" HeightRequest="24"/>
+                <Label x:Name="textColor" Margin="30,0,0,0" Text="{Binding Title}" FontFamily="text" FontSize="18" TextColor="White" FontAttributes="Bold"/>
+            </HorizontalStackLayout>
+        </DataTemplate>
+    </Shell.MenuItemTemplate>
+
+
+   
+
+
+</Shell>
