@@ -1,4 +1,4 @@
 wwwroot\app.css
 wwwroot\index.html
-M:\MyAcento\MyStudentsApp\MyStudentsApp\wwwroot\index.html
-M:\MyAcento\MyStudentsApp\MyStudentsApp\wwwroot\app.css
+C:\Users\Usuario\Desktop\Acento\Students\AcentoApp\MyStudentsApp\wwwroot\app.css
+C:\Users\Usuario\Desktop\Acento\Students\AcentoApp\MyStudentsApp\wwwroot\index.html

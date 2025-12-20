@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "6j5+DQeivL4=",
+  "dgSpecHash": "PJUxJ0iQxPY=",
   "success": true,
-  "projectFilePath": "M:\\MyAcento\\MyStudentsApp\\MyStudentsApp.Web.Client\\MyStudentsApp.Web.Client.csproj",
+  "projectFilePath": "C:\\Users\\Usuario\\Desktop\\Acento\\Students\\AcentoApp\\MyStudentsApp.Web.Client\\MyStudentsApp.Web.Client.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\Usuario\\.nuget\\packages\\fody\\6.6.4\\fody.6.6.4.nupkg.sha512",
     "C:\\Users\\Usuario\\.nuget\\packages\\microsoft.aspnetcore.authorization\\9.0.7\\microsoft.aspnetcore.authorization.9.0.7.nupkg.sha512",
@@ -34,13 +34,13 @@
     "C:\\Users\\Usuario\\.nuget\\packages\\microsoft.jsinterop\\9.0.7\\microsoft.jsinterop.9.0.7.nupkg.sha512",
     "C:\\Users\\Usuario\\.nuget\\packages\\microsoft.jsinterop.webassembly\\9.0.7\\microsoft.jsinterop.webassembly.9.0.7.nupkg.sha512",
     "C:\\Users\\Usuario\\.nuget\\packages\\microsoft.net.http.headers\\2.3.0\\microsoft.net.http.headers.2.3.0.nupkg.sha512",
-    "C:\\Users\\Usuario\\.nuget\\packages\\microsoft.net.illink.tasks\\9.0.9\\microsoft.net.illink.tasks.9.0.9.nupkg.sha512",
-    "C:\\Users\\Usuario\\.nuget\\packages\\microsoft.net.sdk.webassembly.pack\\9.0.9\\microsoft.net.sdk.webassembly.pack.9.0.9.nupkg.sha512",
+    "C:\\Users\\Usuario\\.nuget\\packages\\microsoft.net.illink.tasks\\9.0.11\\microsoft.net.illink.tasks.9.0.11.nupkg.sha512",
+    "C:\\Users\\Usuario\\.nuget\\packages\\microsoft.net.sdk.webassembly.pack\\10.0.0\\microsoft.net.sdk.webassembly.pack.10.0.0.nupkg.sha512",
     "C:\\Users\\Usuario\\.nuget\\packages\\propertychanged.fody\\4.1.0\\propertychanged.fody.4.1.0.nupkg.sha512",
     "C:\\Users\\Usuario\\.nuget\\packages\\system.buffers\\4.6.0\\system.buffers.4.6.0.nupkg.sha512",
     "C:\\Users\\Usuario\\.nuget\\packages\\system.io.pipelines\\5.0.2\\system.io.pipelines.5.0.2.nupkg.sha512",
     "C:\\Users\\Usuario\\.nuget\\packages\\system.text.encodings.web\\8.0.0\\system.text.encodings.web.8.0.0.nupkg.sha512",
-    "C:\\Users\\Usuario\\.nuget\\packages\\microsoft.netcore.app.runtime.mono.browser-wasm\\9.0.9\\microsoft.netcore.app.runtime.mono.browser-wasm.9.0.9.nupkg.sha512"
+    "C:\\Users\\Usuario\\.nuget\\packages\\microsoft.netcore.app.runtime.mono.browser-wasm\\9.0.11\\microsoft.netcore.app.runtime.mono.browser-wasm.9.0.11.nupkg.sha512"
   ],
   "logs": []
 }

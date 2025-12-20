@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Diagnostics;
@@ -6,13 +6,12 @@ using System.Threading.Tasks;
 using MyStudentsApp.Shared.DTOShared;
 using PropertyChanged;
 using Microsoft.AspNetCore.SignalR.Client;
+
 namespace MyStudentsApp.Services
 {
-    // Ya no necesita la lógica del patrón Singleton
-    // usando MyStudentsApp.Shared.DTOShared (tu DTO compartido)
     public class ChatService
     {
-        private HubConnection _connection;
+        private HubConnection? _connection;
         public bool IsConnected => _connection?.State == HubConnectionState.Connected;
 
         public event Action<MensajeResponseDTO>? mensajeNuevo;
@@ -20,133 +19,206 @@ namespace MyStudentsApp.Services
 
         public ChatService()
         {
-            Debug.WriteLine("[CONEXIONES_HUB] 💡 Constructor ChatService.");
-            // no await en constructor; exponer StartAsync para iniciar la conexión desde fuera si hace falta
-            InitializeConnection();
+            Debug.WriteLine("[CHAT_SERVICE] Constructor - Inicializando servicio de chat");
         }
 
-        private void InitializeConnection()
+        public async Task InitializeConnectionAsync()
         {
-            Debug.WriteLine("[CONEXIONES_HUB] Configurando conexión SignalR");
-
-            _connection = new HubConnectionBuilder()
-                .WithUrl("https://localhost:7224/hubs/chat", options =>
+            try
+            {
+                // Si ya hay una conexión activa, no crear otra
+                if (_connection != null && (_connection.State == HubConnectionState.Connected || _connection.State == HubConnectionState.Connecting))
                 {
-                    // mejor patrón: AccessTokenProvider
-                    options.AccessTokenProvider = async () =>
+                    Debug.WriteLine("[CHAT_SERVICE] ⚠️ Conexión ya existe y está activa/conectando");
+                    return;
+                }
+
+                Debug.WriteLine("[CHAT_SERVICE] 🔌 Configurando nueva conexión SignalR");
+
+                _connection = new HubConnectionBuilder()
+                    .WithUrl("https://localhost:7224/hubs/chat", options =>
                     {
-                        string token = Preferences.Get("token", string.Empty);
-                        // Preferences.Get es de Xamarin/MAUI; adapta según plataforma
-                        return token;
-                    };
-                })
-                .WithAutomaticReconnect()
-                .Build();
+                        options.AccessTokenProvider = async () =>
+                        {
+                            try
+                            {
+                                string token = Preferences.Get("token", string.Empty);
+                                Debug.WriteLine($"[CHAT_SERVICE] 🔑 Token obtenido: {(!string.IsNullOrEmpty(token) ? "✅" : "❌")}");
+                                return token;
+                            }
+                            catch (Exception ex)
+                            {
+                                Debug.WriteLine($"[CHAT_SERVICE] ❌ Error obteniendo token: {ex.Message}");
+                                return string.Empty;
+                            }
+                        };
+                    })
+                    .WithAutomaticReconnect()
+                    .Build();
 
-            // registrar eventos que vienen del servidor
-            SetupHubEvents();
+                SetupHubEvents();
+                SetupConnectionEvents();
 
-            // arrancar la conexión (no bloqueante)
-            _ = StartConnectionAsync(); // puedes guardar la Task si quieres esperar en otro sitio
-
-            // reconnection events
-            _connection.Reconnecting += error =>
+                await StartConnectionAsync();
+            }
+            catch (Exception ex)
             {
-                Debug.WriteLine($"[SIGNALR_CONEXION] Reconectando... {error?.Message}");
-                return Task.CompletedTask;
-            };
-            _connection.Reconnected += connId =>
-            {
-                Debug.WriteLine($"[SIGNALR_CONEXION] Reconectado: {connId}");
-                return Task.CompletedTask;
-            };
-            _connection.Closed += error =>
-            {
-                Debug.WriteLine($"[SIGNALR_CONEXION] Cerrado: {error?.Message}");
-                return Task.CompletedTask;
-            };
+                Debug.WriteLine($"[CHAT_SERVICE] ❌ Error en InitializeConnectionAsync: {ex.Message}");
+                // No lanzar la excepción para evitar que crashee la app
+            }
         }
 
         private void SetupHubEvents()
         {
-            // cuando el servidor hace: Clients.Client(...).SendAsync("ReceiveMessage", message);
-            _connection.On<MensajeResponseDTO>("ReceiveMessage", (message) =>
+            try
             {
-                Debug.WriteLine("[SIGNALR_EVENT] ReceiveMessage: " + message);
-                // construir un DTO mínimo o emitir solo el string. Aquí emitimos evento con DTO simple:
-                MensajeResponseDTO dto = message;
-                mensajeNuevo?.Invoke(dto);
-            });
+                Debug.WriteLine("[CHAT_SERVICE] 📡 Configurando eventos del Hub");
 
-            // cuando el servidor hace: Clients.Caller.SendAsync("ReceivedHistoryChat", messageDtos);
-            // si tu DTO es List<MensajeResponseDTO> o MensajeResponseDTO[] puedes elegir:
-            _connection.On<List<MensajeResponseDTO>>("ReceivedHistoryChat", (messages) =>
-            {
-                Debug.WriteLine("[SIGNALR_EVENT] ReceivedHistoryChat count: " + messages.Count);
-                recibirMensajesHistorial?.Invoke(messages.ToArray());
-            });
+                // Importante: Remover handlers anteriores si existen para evitar duplicados
+                _connection?.Remove("ReceiveMessage");
+                _connection?.Remove("ReceivedHistoryChat");
 
-            // si el servidor pudiera enviar arrays en vez de listas:
-            _connection.On<MensajeResponseDTO[]>("ReceivedHistoryChat", (messages) =>
+                _connection?.On<MensajeResponseDTO>("ReceiveMessage", (message) =>
+                {
+                    Debug.WriteLine($"[CHAT_SERVICE] 📨 ReceiveMessage: {message.mensaje}");
+                    mensajeNuevo?.Invoke(message);
+                });
+
+                _connection?.On<List<MensajeResponseDTO>>("ReceivedHistoryChat", (messages) =>
+                {
+                    Debug.WriteLine($"[CHAT_SERVICE] 📚 ReceivedHistoryChat: {messages.Count} mensajes");
+                    recibirMensajesHistorial?.Invoke(messages.ToArray());
+                });
+            }
+            catch (Exception ex)
             {
-                Debug.WriteLine("[SIGNALR_EVENT] ReceivedHistoryChat (array) count: " + messages.Length);
-                recibirMensajesHistorial?.Invoke(messages);
-            });
+                Debug.WriteLine($"[CHAT_SERVICE] ❌ Error en SetupHubEvents: {ex.Message}");
+            }
+        }
+
+        private void SetupConnectionEvents()
+        {
+            try
+            {
+                if (_connection == null) return;
+
+                _connection.Reconnecting += error =>
+                {
+                    Debug.WriteLine($"[CHAT_SERVICE] 🔄 Reconectando... {error?.Message}");
+                    return Task.CompletedTask;
+                };
+
+                _connection.Reconnected += connId =>
+                {
+                    Debug.WriteLine($"[CHAT_SERVICE] ✅ Reconectado: {connId}");
+                    return Task.CompletedTask;
+                };
+
+                _connection.Closed += error =>
+                {
+                    Debug.WriteLine($"[CHAT_SERVICE] ❌ Conexión cerrada: {error?.Message}");
+                    return Task.CompletedTask;
+                };
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine($"[CHAT_SERVICE] ❌ Error en SetupConnectionEvents: {ex.Message}");
+            }
         }
 
         private async Task StartConnectionAsync()
         {
             try
             {
+                if (_connection == null)
+                {
+                    Debug.WriteLine("[CHAT_SERVICE] ⚠️ Connection es null, no se puede iniciar");
+                    return;
+                }
+
                 await _connection.StartAsync();
-                Debug.WriteLine("[SIGNALR_CONEXION] Conexión iniciada correctamente");
+                Debug.WriteLine("[CHAT_SERVICE] ✅ Conexión iniciada correctamente");
             }
             catch (Exception ex)
             {
-                Debug.WriteLine("[SIGNALR_CONEXION] Error al iniciar: " + ex.Message);
+                Debug.WriteLine($"[CHAT_SERVICE] ❌ Error al iniciar conexión: {ex.Message}");
+                // No lanzar la excepción para evitar que crashee la app
             }
         }
 
-        // Invocar método GetMessages que en el Hub actual no devuelve valor directo,
-        // pero en tu Hub GetMessages manda el historial via Clients.Caller.SendAsync("ReceivedHistoryChat", messageDtos);
-        // Si quieres obtener directamente la lista como respuesta, modifica el Hub para return messageDtos.
-        // Aquí llamas y esperas que el servidor envíe el evento "ReceivedHistoryChat".
-        public async Task<List<MensajeResponseDTO>> obtenerAllMessages(string recipientId)
+        public async Task<List<MensajeResponseDTO>> ObtenerAllMessages(string recipientId)
         {
-            if (_connection.State != HubConnectionState.Connected)
-                await StartConnectionAsync();
-
-            // Opciones:
-            // 1) Si en el Hub GetMessages simplemente envía ReceivedHistoryChat, invócala y recibe el evento que ya registraste.
-            await _connection.SendAsync("GetMessages", recipientId);
-
-            // 2) Si prefieres que el Hub devuelva la lista directamente, cambia el Hub a:
-            //    public async Task<List<MensajeResponseDTO>> GetMessages(string recipientId) { ... return messageDtos; }
-            // y aquí harías:
-            // return await _connection.InvokeAsync<List<MensajeResponseDTO>>("GetMessages", recipientId);
-
-            // Como en tu Hub actual la lista llega por evento, devolvemos vacío o manejar mediante evento.
-            return new List<MensajeResponseDTO>(); // o null; preferible usar el evento recibirMensajesHistorial
-        }
-
-        // Para enviar mensaje al Hub (SendMessage en tu Hub)
-        public async Task SendMessageTo(string recipientId, string message)
-        {
-            if (_connection.State != HubConnectionState.Connected)
-                await StartConnectionAsync();
-
             try
             {
-                // SendAsync ya está bien para métodos Task sin resultado
-                await _connection.SendAsync("SendMessage", recipientId, message);
-                Debug.WriteLine("[SIGNALR] Mensaje enviado al Hub");
+                if (_connection == null || _connection.State != HubConnectionState.Connected)
+                {
+                    Debug.WriteLine("[CHAT_SERVICE] ⚠️ No hay conexión, intentando conectar...");
+                    await InitializeConnectionAsync();
+                }
+
+                Debug.WriteLine($"[CHAT_SERVICE] 📥 Solicitando mensajes con: {recipientId}");
+                await _connection.SendAsync("GetMessages", recipientId);
+
+                return new List<MensajeResponseDTO>();
             }
             catch (Exception ex)
             {
-                Debug.WriteLine("[SIGNALR] Error enviando mensaje: " + ex.Message);
-                throw;
+                Debug.WriteLine($"[CHAT_SERVICE] ❌ Error obteniendo mensajes: {ex.Message}");
+                return new List<MensajeResponseDTO>();
             }
         }
-    }
 
+        public async Task SendMessageTo(string recipientId, string message)
+        {
+            try
+            {
+                if (string.IsNullOrWhiteSpace(message))
+                {
+                    Debug.WriteLine("[CHAT_SERVICE] ⚠️ Mensaje vacío, no se envía");
+                    return;
+                }
+
+                if (_connection == null || _connection.State != HubConnectionState.Connected)
+                {
+                    Debug.WriteLine("[CHAT_SERVICE] ⚠️ No hay conexión, intentando conectar...");
+                    await InitializeConnectionAsync();
+                }
+
+                Debug.WriteLine($"[CHAT_SERVICE] 📤 Enviando mensaje a: {recipientId}");
+                await _connection?.SendAsync("SendMessage", recipientId, message);
+                Debug.WriteLine("[CHAT_SERVICE] ✅ Mensaje enviado");
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine($"[CHAT_SERVICE] ❌ Error enviando mensaje: {ex.Message}");
+            }
+        }
+
+        public async Task DisconnectAsync()
+        {
+            try
+            {
+                if (_connection != null && _connection.State == HubConnectionState.Connected)
+                {
+                    Debug.WriteLine("[CHAT_SERVICE] 🔌 Desconectando SignalR...");
+                    await _connection.StopAsync();
+                    await _connection.DisposeAsync();
+                    _connection = null;
+                    Debug.WriteLine("[CHAT_SERVICE] ✅ Desconectado correctamente");
+                }
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine($"[CHAT_SERVICE] ❌ Error al desconectar: {ex.Message}");
+            }
+        }
+
+        // Método para limpiar eventos suscritos (importante para evitar memory leaks)
+        public void ClearEventHandlers()
+        {
+            Debug.WriteLine("[CHAT_SERVICE] 🧹 Limpiando event handlers");
+            mensajeNuevo = null;
+            recibirMensajesHistorial = null;
+        }
+    }
 }

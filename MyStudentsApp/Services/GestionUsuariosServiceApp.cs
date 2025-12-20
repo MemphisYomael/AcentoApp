@@ -225,6 +225,32 @@ namespace MyStudentsApp.Services
 
         public async Task<bool> EliminarTareaAsync(string id) => await DeleteAsync($"eliminarTarea/{id}");
 
+        public async Task<bool> AsignarTareaAEstudiantes(int tareaId, List<int> estudiantesIds)
+        {
+            try
+            {
+                SetAuthorizationHeader();
+                var content = new StringContent(JsonSerializer.Serialize(estudiantesIds), Encoding.UTF8, "application/json");
+                var response = await _httpClient.PostAsync($"asignarTareaAEstudiantes?tareaId={tareaId}", content);
+                return response.IsSuccessStatusCode;
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Error al asignar tarea a estudiantes: {ex}");
+                return false;
+            }
+        }
+
+        public async Task<List<TareaResponseDTO>> ObtenerTareasDeEstudiante()
+        {
+            return await GetAsync<List<TareaResponseDTO>>("obtenerTareasDeEstudiante") ?? new List<TareaResponseDTO>();
+        }
+
+        public async Task<List<TareaResponseDTO>> ObtenerTareasDelProfesor()
+        {
+            return await GetAsync<List<TareaResponseDTO>>("obtenerTareasDelProfesor") ?? new List<TareaResponseDTO>();
+        }
+
         #endregion
 
         #region Entregas de Tareas
@@ -254,5 +280,85 @@ namespace MyStudentsApp.Services
             // Este método está obsoleto, usar CrearEscuelaYDirector en su lugar.
             throw new NotImplementedException("Usar CrearEscuelaYDirector en su lugar.");
         }
+
+
+        #region Vinculaciones
+
+        public async Task<bool> VincularEstudianteACurso(int estudianteId, int cursoId)
+        {
+            try
+            {
+                SetAuthorizationHeader();
+                var response = await _httpClient.PostAsync($"vincularEstudianteACurso?estudianteId={estudianteId}&cursoId={cursoId}", null);
+                return response.IsSuccessStatusCode;
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Error al vincular estudiante a curso: {ex}");
+                return false;
+            }
+        }
+
+        public async Task<bool> DesvincularEstudianteDeCurso(int estudianteId, int cursoId)
+        {
+            try
+            {
+                SetAuthorizationHeader();
+                var response = await _httpClient.DeleteAsync($"desvincularEstudianteDeCurso?estudianteId={estudianteId}&cursoId={cursoId}");
+                return response.IsSuccessStatusCode;
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Error al desvincular estudiante de curso: {ex}");
+                return false;
+            }
+        }
+
+        public async Task<bool> VincularProfesorACurso(int profesorId, int cursoId)
+        {
+            try
+            {
+                SetAuthorizationHeader();
+                var response = await _httpClient.PostAsync($"vincularProfesorACurso?profesorId={profesorId}&cursoId={cursoId}", null);
+                return response.IsSuccessStatusCode;
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Error al vincular profesor a curso: {ex}");
+                return false;
+            }
+        }
+
+        public async Task<bool> DesvincularProfesorDeCurso(int profesorId, int cursoId)
+        {
+            try
+            {
+                SetAuthorizationHeader();
+                var response = await _httpClient.DeleteAsync($"desvincularProfesorDeCurso?profesorId={profesorId}&cursoId={cursoId}");
+                return response.IsSuccessStatusCode;
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Error al desvincular profesor de curso: {ex}");
+                return false;
+            }
+        }
+
+        public async Task<List<EstudianteResponseDTO>> ObtenerEstudiantesDeCurso(int cursoId)
+        {
+            return await GetAsync<List<EstudianteResponseDTO>>($"obtenerEstudiantesDeCurso/{cursoId}") ?? new List<EstudianteResponseDTO>();
+        }
+
+        public async Task<List<ProfesorResponseDTO>> ObtenerProfesoresDeCurso(int cursoId)
+        {
+            return await GetAsync<List<ProfesorResponseDTO>>($"obtenerProfesoresDeCurso/{cursoId}") ?? new List<ProfesorResponseDTO>();
+        }
+
+        public async Task<List<ProfesorResponseDTO>> ObtenerProfesoresDeEstudianteAsync()
+        {
+            return await GetAsync<List<ProfesorResponseDTO>>("obtenerProfesoresDeEstudiante") ?? new List<ProfesorResponseDTO>();
+        }
+
+        #endregion
     }
 }

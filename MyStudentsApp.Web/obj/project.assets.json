@@ -1530,11 +1530,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "M:\\MyAcento\\MyStudentsApp\\MyStudentsApp.Web\\MyStudentsApp.Web.csproj",
+      "projectUniqueName": "C:\\Users\\Usuario\\Desktop\\Acento\\Students\\AcentoApp\\MyStudentsApp.Web\\MyStudentsApp.Web.csproj",
       "projectName": "MyStudentsApp.Web",
-      "projectPath": "M:\\MyAcento\\MyStudentsApp\\MyStudentsApp.Web\\MyStudentsApp.Web.csproj",
+      "projectPath": "C:\\Users\\Usuario\\Desktop\\Acento\\Students\\AcentoApp\\MyStudentsApp.Web\\MyStudentsApp.Web.csproj",
       "packagesPath": "C:\\Users\\Usuario\\.nuget\\packages\\",
-      "outputPath": "M:\\MyAcento\\MyStudentsApp\\MyStudentsApp.Web\\obj\\",
+      "outputPath": "C:\\Users\\Usuario\\Desktop\\Acento\\Students\\AcentoApp\\MyStudentsApp.Web\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
@@ -1556,8 +1556,8 @@
         "net9.0": {
           "targetAlias": "net9.0",
           "projectReferences": {
-            "M:\\MyAcento\\MyStudentsApp\\MyStudentsApp.Web.Client\\MyStudentsApp.Web.Client.csproj": {
-              "projectPath": "M:\\MyAcento\\MyStudentsApp\\MyStudentsApp.Web.Client\\MyStudentsApp.Web.Client.csproj"
+            "C:\\Users\\Usuario\\Desktop\\Acento\\Students\\AcentoApp\\MyStudentsApp.Web.Client\\MyStudentsApp.Web.Client.csproj": {
+              "projectPath": "C:\\Users\\Usuario\\Desktop\\Acento\\Students\\AcentoApp\\MyStudentsApp.Web.Client\\MyStudentsApp.Web.Client.csproj"
             }
           }
         }
@@ -1572,7 +1572,7 @@
         "auditLevel": "low",
         "auditMode": "direct"
       },
-      "SdkAnalysisLevel": "9.0.300"
+      "SdkAnalysisLevel": "10.0.100"
     },
     "frameworks": {
       "net9.0": {
@@ -1602,7 +1602,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.305/PortableRuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\10.0.101/PortableRuntimeIdentifierGraph.json"
       }
     }
   }

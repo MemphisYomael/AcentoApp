@@ -20,55 +20,57 @@ build_property.EnforceExtendedAnalyzerRules =
 build_property.EnforceExtendedAnalyzerRules = 
 build_property._SupportedPlatformList = Linux,macOS,Windows
 build_property._SupportedPlatformList = Linux,macOS,Windows
+build_property.TargetFrameworkIdentifier = .NETCoreApp
+build_property.TargetFrameworkVersion = v9.0
 build_property.RootNamespace = MyStudentsApp
 build_property.RootNamespace = MyStudentsApp
-build_property.ProjectDir = C:\Users\Usuario\Desktop\personal\MyStudentsApp\MyStudentsApp\
+build_property.ProjectDir = C:\Users\Usuario\Desktop\Acento\Students\AcentoApp\MyStudentsApp\
 build_property.EnableComHosting = 
 build_property.EnableGeneratedComInterfaceComImportInterop = 
 build_property.RazorLangVersion = 9.0
 build_property.SupportLocalizedComponentNames = 
 build_property.GenerateRazorMetadataSourceChecksumAttributes = 
-build_property.MSBuildProjectDirectory = C:\Users\Usuario\Desktop\personal\MyStudentsApp\MyStudentsApp
+build_property.MSBuildProjectDirectory = C:\Users\Usuario\Desktop\Acento\Students\AcentoApp\MyStudentsApp
 build_property._RazorSourceGeneratorDebug = 
 build_property.EffectiveAnalysisLevelStyle = 9.0
 build_property.EnableCodeStyleSeverity = 
 
-[C:/Users/Usuario/Desktop/personal/MyStudentsApp/MyStudentsApp/App.xaml]
+[C:/Users/Usuario/Desktop/Acento/Students/AcentoApp/MyStudentsApp/App.xaml]
 build_metadata.AdditionalFiles.GenKind = Xaml
 build_metadata.AdditionalFiles.ManifestResourceName = MyStudentsApp.App.xaml
 build_metadata.AdditionalFiles.TargetPath = App.xaml
 build_metadata.AdditionalFiles.RelativePath = App.xaml
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Usuario/Desktop/personal/MyStudentsApp/MyStudentsApp/AppMainShell.xaml]
+[C:/Users/Usuario/Desktop/Acento/Students/AcentoApp/MyStudentsApp/AppMainShell.xaml]
 build_metadata.AdditionalFiles.GenKind = Xaml
 build_metadata.AdditionalFiles.ManifestResourceName = MyStudentsApp.AppMainShell.xaml
 build_metadata.AdditionalFiles.TargetPath = AppMainShell.xaml
 build_metadata.AdditionalFiles.RelativePath = AppMainShell.xaml
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Usuario/Desktop/personal/MyStudentsApp/MyStudentsApp/MainPage.xaml]
+[C:/Users/Usuario/Desktop/Acento/Students/AcentoApp/MyStudentsApp/MainPage.xaml]
 build_metadata.AdditionalFiles.GenKind = Xaml
 build_metadata.AdditionalFiles.ManifestResourceName = MyStudentsApp.MainPage.xaml
 build_metadata.AdditionalFiles.TargetPath = MainPage.xaml
 build_metadata.AdditionalFiles.RelativePath = MainPage.xaml
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Usuario/Desktop/personal/MyStudentsApp/MyStudentsApp/MVVM/Models/ContentViews/TarjetaUsuarioControl.xaml]
+[C:/Users/Usuario/Desktop/Acento/Students/AcentoApp/MyStudentsApp/MVVM/Models/ContentViews/TarjetaUsuarioControl.xaml]
 build_metadata.AdditionalFiles.GenKind = Xaml
 build_metadata.AdditionalFiles.ManifestResourceName = MyStudentsApp.MVVM.Models.ContentViews.TarjetaUsuarioControl.xaml
 build_metadata.AdditionalFiles.TargetPath = MVVM\Models\ContentViews\TarjetaUsuarioControl.xaml
 build_metadata.AdditionalFiles.RelativePath = MVVM\Models\ContentViews\TarjetaUsuarioControl.xaml
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Usuario/Desktop/personal/MyStudentsApp/MyStudentsApp/MVVM/Views/vista.xaml]
+[C:/Users/Usuario/Desktop/Acento/Students/AcentoApp/MyStudentsApp/MVVM/Views/ChatZoneView.xaml]
 build_metadata.AdditionalFiles.GenKind = Xaml
-build_metadata.AdditionalFiles.ManifestResourceName = MyStudentsApp.MVVM.Views.vista.xaml
-build_metadata.AdditionalFiles.TargetPath = MVVM\Views\vista.xaml
-build_metadata.AdditionalFiles.RelativePath = MVVM\Views\vista.xaml
+build_metadata.AdditionalFiles.ManifestResourceName = MyStudentsApp.MVVM.Views.ChatZoneView.xaml
+build_metadata.AdditionalFiles.TargetPath = MVVM\Views\ChatZoneView.xaml
+build_metadata.AdditionalFiles.RelativePath = MVVM\Views\ChatZoneView.xaml
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Usuario/Desktop/personal/MyStudentsApp/MyStudentsApp/Components/_Imports.razor]
+[C:/Users/Usuario/Desktop/Acento/Students/AcentoApp/MyStudentsApp/Components/_Imports.razor]
 build_metadata.AdditionalFiles.GenKind = 
 build_metadata.AdditionalFiles.ManifestResourceName = 
 build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xfSW1wb3J0cy5yYXpvcg==

@@ -60,6 +60,7 @@
     <MauiAsset Include="Resources\Raw\**" LogicalName="%(RecursiveDir)%(Filename)%(Extension)" />
   </ItemGroup>
 
+
   <ItemGroup>
     <PackageReference Include="CommunityToolkit.Maui" Version="12.1.0" />
     <PackageReference Include="CommunityToolkit.Maui.Markup" Version="6.0.1" />
@@ -74,7 +75,6 @@
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
       <PrivateAssets>all</PrivateAssets>
     </PackageReference>
-    <PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite" Version="9.0.7" />
     <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="9.0.7" />
     <PackageReference Include="Microsoft.Maui.Controls" Version="9.0.90" />
     <PackageReference Include="Microsoft.AspNetCore.Components.WebView.Maui" Version="9.0.90" />
@@ -91,16 +91,10 @@
   </ItemGroup>
 
   <ItemGroup>
-    <MauiXaml Update="AppMainShell.xaml">
-      <Generator>MSBuild:Compile</Generator>
-    </MauiXaml>
     <MauiXaml Update="MVVM\Models\ContentViews\TarjetaUsuarioControl.xaml">
       <Generator>MSBuild:Compile</Generator>
     </MauiXaml>
     <MauiXaml Update="MVVM\Views\ChatZoneView.xaml">
-      <Generator>MSBuild:Compile</Generator>
-    </MauiXaml>
-    <MauiXaml Update="MVVM\Views\vista.xaml">
       <Generator>MSBuild:Compile</Generator>
     </MauiXaml>
   </ItemGroup>

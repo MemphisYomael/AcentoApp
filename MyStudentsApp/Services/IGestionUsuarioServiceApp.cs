@@ -65,5 +65,15 @@ namespace MyStudentsApp.Services
         Task<bool> ActualizarEntregaAsync(string id, EntregaTareaRequestDTO entregaDto);
         Task<bool> EliminarEntregaAsync(string id);
         #endregion
+
+        #region Vinculaciones
+        Task<bool> VincularEstudianteACurso(int estudianteId, int cursoId);
+        Task<bool> DesvincularEstudianteDeCurso(int estudianteId, int cursoId);
+        Task<bool> VincularProfesorACurso(int profesorId, int cursoId);
+        Task<bool> DesvincularProfesorDeCurso(int profesorId, int cursoId);
+        Task<List<EstudianteResponseDTO>> ObtenerEstudiantesDeCurso(int cursoId);
+        Task<List<ProfesorResponseDTO>> ObtenerProfesoresDeCurso(int cursoId);
+        Task<List<ProfesorResponseDTO>> ObtenerProfesoresDeEstudianteAsync();
+        #endregion
     }
 }

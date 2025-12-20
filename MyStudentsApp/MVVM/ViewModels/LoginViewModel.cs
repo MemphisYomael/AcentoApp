@@ -18,18 +18,21 @@ namespace MyStudentsApp.MVVM.ViewModels
     public class LoginViewModel
     {
         private readonly IGestionUsuarioServiceApp _gestionUsuariosService;
+        private readonly AuthorizationService _authService;
+
         public LoginRequestDTO GuardarSesionModel { get; set; } = new();
 
         public ICommand loginCommand { get; set; }
 
-        public LoginViewModel(IGestionUsuarioServiceApp gestion)    
+        public LoginViewModel(IGestionUsuarioServiceApp gestion, AuthorizationService authService)
         {
+            _gestionUsuariosService = gestion;
+            _authService = authService;
+
             loginCommand = new Command(async () =>
             {
                 await Login();
             });
-            _gestionUsuariosService = gestion;
-
 
             PreferencesInitialize();
         }
@@ -61,7 +64,11 @@ namespace MyStudentsApp.MVVM.ViewModels
 
             if (await _gestionUsuariosService.Login(GuardarSesionModel))
             {
-               
+                // *** NUEVO: Actualizar usuario actual en el servicio de autorización ***
+                await _authService.UpdateCurrentUser(_gestionUsuariosService);
+
+                // *** NUEVO: Navegar al Dashboard después del login exitoso ***
+                //await Shell.Current.GoToAsync("//DashboardFlyoutItem");
 #if !WINDOWS
                 var snackbar = Snackbar.Make("Iniciaste Sesion Con Exito!!", actionButtonText: "OK");
                 snackbar.VisualOptions.TextColor = Colors.White;
@@ -69,8 +76,7 @@ namespace MyStudentsApp.MVVM.ViewModels
                 snackbar.VisualOptions.BackgroundColor = Colors.Green;
                 await snackbar.Show();
 #else
-await Application.Current.MainPage.DisplayAlert("Estatus", "Iniciaste Sesion Con Exito!!", "OK");
-
+                await Application.Current.MainPage.DisplayAlert("Estatus", "Iniciaste Sesion Con Exito!!", "OK");
 #endif
             }
             else
@@ -83,8 +89,7 @@ await Application.Current.MainPage.DisplayAlert("Estatus", "Iniciaste Sesion Con
                 snackbar.VisualOptions.BackgroundColor = Colors.Red;
                 await snackbar.Show();
 #else
-await Application.Current.MainPage.DisplayAlert("Estatus", "Por favor, refiva tus credenciales!", "OK");
-
+                await Application.Current.MainPage.DisplayAlert("Estatus", "Por favor, verifica tus credenciales!", "OK");
 #endif
 
             }

@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "46IDXk1P1Zk=",
+  "dgSpecHash": "ixIDFbtQxzM=",
   "success": true,
-  "projectFilePath": "M:\\MyAcento\\MyStudentsApp\\MyStudentsApp.Shared\\MyStudentsApp.Shared.csproj",
+  "projectFilePath": "C:\\Users\\Usuario\\Desktop\\Acento\\Students\\AcentoApp\\MyStudentsApp.Shared\\MyStudentsApp.Shared.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\Usuario\\.nuget\\packages\\fody\\6.6.4\\fody.6.6.4.nupkg.sha512",
     "C:\\Users\\Usuario\\.nuget\\packages\\microsoft.aspnetcore.authorization\\9.0.7\\microsoft.aspnetcore.authorization.9.0.7.nupkg.sha512",

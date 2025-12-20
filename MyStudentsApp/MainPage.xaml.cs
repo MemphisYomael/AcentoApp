@@ -1,4 +1,4 @@
-﻿using MyStudentsApp.Services;
+using MyStudentsApp.Services;
 using MyStudentsApp.Shared.DTOShared;
 
 namespace MyStudentsApp

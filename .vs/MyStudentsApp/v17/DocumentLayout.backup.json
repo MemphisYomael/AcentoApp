@@ -88,7 +88,7 @@
               "RelativeDocumentMoniker": "MyStudentsApp\\Services\\ChatService.cs",
               "ToolTip": "C:\\Users\\Usuario\\Desktop\\personal\\MyStudentsApp\\MyStudentsApp\\Services\\ChatService.cs",
               "RelativeToolTip": "MyStudentsApp\\Services\\ChatService.cs",
-              "ViewState": "AgIAAFUAAAAAAAAAAAAAAB8AAAANAAAAAAAAAA==",
+              "ViewState": "AgIAAFUAAAAAAAAAAAAAAFgAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-07-18T17:22:53.586Z",
               "EditorCaption": ""
@@ -223,7 +223,8 @@
               "RelativeToolTip": "MyStudentsApp\\MVVM\\ViewModels\\CrearProfesorViewModel.cs",
               "ViewState": "AgIAACIAAAAAAAAAAAAhwC0AAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-07-13T20:53:47.591Z"
+              "WhenOpened": "2025-07-13T20:53:47.591Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
@@ -235,7 +236,8 @@
               "RelativeToolTip": "MyStudentsApp\\MVVM\\ViewModels\\CrearEstudianteViewModel.cs",
               "ViewState": "AgIAABoAAAAAAAAAAAAgwCoAAAANAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-07-13T20:25:10.762Z"
+              "WhenOpened": "2025-07-13T20:25:10.762Z",
+              "EditorCaption": ""
             }
           ]
         }

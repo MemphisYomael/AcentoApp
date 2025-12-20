@@ -22,7 +22,7 @@ public class ListadoEstudiantesProfesores : ContentPage
         VerticalOptions = LayoutOptions.Center,
     };
 
-    public ListadoEstudiantesProfesores(ListadoDeEstudiantesViewModel viewModel, ChatZoneViewModel chatZoneView)
+    public ListadoEstudiantesProfesores(ListadoDeEstudiantesViewModel viewModel)
 	{
         Title = "Listado de Estudiantes";
         searchBar.TextChanged += (sender, e) =>
@@ -118,11 +118,17 @@ public class ListadoEstudiantesProfesores : ContentPage
                         {
                             IconImageSource = "chat.png",
                             //BackgroundColor = Color.FromArgb("#294f52"),
-                            Command = new Command((object student) =>
+                            Command = new Command(async (object student) =>
                             {
                                 if (student is EstudianteResponseDTO studentDto)
                                 {
-                                    Navigation.PushAsync(new ChatZoneView(studentDto.nombres + " " + studentDto.apellidos, studentDto.usuarioId! ,chatZoneView));
+                                    // Usar navegación Shell en lugar de Navigation.PushAsync
+                                    await Shell.Current.GoToAsync("chatZone", 
+                                        new Dictionary<string, object>
+                                        {
+                                            ["nombre"] = studentDto.nombres + " " + studentDto.apellidos,
+                                            ["usuarioId"] = studentDto.usuarioId!
+                                        });
                                 }
                             }),
                             CommandParameter = new Binding("."),
@@ -208,7 +214,7 @@ public class ListadoEstudiantesProfesores : ContentPage
             viewModel.ObtenerEstudiantes();
 
             viewModel.EstudiantesFiltrados = viewModel.Estudiantes;
-            // L�gica adicional si es necesaria
+            // Lógica adicional si es necesaria
         }
         base.OnAppearing();
     }

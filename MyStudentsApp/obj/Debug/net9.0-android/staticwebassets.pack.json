@@ -1,15 +1,15 @@
 {
   "Files": [
     {
-      "Id": "M:\\MyAcento\\MyStudentsApp\\MyStudentsApp\\obj\\Debug\\net9.0-android\\scopedcss\\bundle\\MyStudentsApp.styles.css",
+      "Id": "C:\\Users\\Usuario\\Desktop\\Acento\\Students\\AcentoApp\\MyStudentsApp\\obj\\Debug\\net9.0-android\\scopedcss\\bundle\\MyStudentsApp.styles.css",
       "PackagePath": "staticwebassets\\MyStudentsApp.styles.css"
     },
     {
-      "Id": "M:\\MyAcento\\MyStudentsApp\\MyStudentsApp\\wwwroot\\app.css",
+      "Id": "C:\\Users\\Usuario\\Desktop\\Acento\\Students\\AcentoApp\\MyStudentsApp\\wwwroot\\app.css",
       "PackagePath": "staticwebassets\\app.css"
     },
     {
-      "Id": "M:\\MyAcento\\MyStudentsApp\\MyStudentsApp\\wwwroot\\index.html",
+      "Id": "C:\\Users\\Usuario\\Desktop\\Acento\\Students\\AcentoApp\\MyStudentsApp\\wwwroot\\index.html",
       "PackagePath": "staticwebassets\\index.html"
     },
     {
