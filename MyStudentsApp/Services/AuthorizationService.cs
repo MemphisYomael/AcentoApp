@@ -1,4 +1,5 @@
-﻿using MyStudentsApp.Shared.DTOShared;
+using MyStudentsApp.Services.Notifications;
+using MyStudentsApp.Shared.DTOShared;
 using MyStudentsApp.Shared.ModelsShared;
 
 namespace MyStudentsApp.Services
@@ -60,6 +61,7 @@ namespace MyStudentsApp.Services
         public bool IsAdministrative => (IsTeacher && ProfesorActual?.isAdministrativo == true) || IsDirector;
 
         public bool IsDirector => UsuarioActual?.isStudent == false && UsuarioActual?.Profesor == null && UsuarioActual?.studentId == null && UsuarioActual?.teacherId == null;
+
         /// <summary>
         /// Actualiza la información del usuario autenticado
         /// </summary>
@@ -69,7 +71,7 @@ namespace MyStudentsApp.Services
             {
                 var usuario = await service.GetUsuarioActual();
                 UsuarioActual = usuario;
-                
+
                 // Si es profesor, obtener información adicional
                 if (usuario != null && !usuario.isStudent && usuario.teacherId.HasValue)
                 {
@@ -100,6 +102,34 @@ namespace MyStudentsApp.Services
             Preferences.Remove("userId");
             Preferences.Remove("password");
             Preferences.Remove("email");
+        }
+
+        /// <summary>
+        /// Cierra sesión local y sincroniza el estado con OneSignal y la API.
+        /// </summary>
+        public async Task LogoutAsync(
+            INotificationDeviceService notificationDeviceService,
+            IOneSignalMauiService oneSignalMauiService)
+        {
+            try
+            {
+                await notificationDeviceService.DesactivarDispositivoActualAsync();
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Error al desactivar el dispositivo: {ex.Message}");
+            }
+
+            try
+            {
+                await oneSignalMauiService.LogoutAsync();
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Error al cerrar sesión en OneSignal: {ex.Message}");
+            }
+
+            ClearAuthentication();
         }
 
         /// <summary>

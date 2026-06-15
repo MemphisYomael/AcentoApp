@@ -1,4 +1,5 @@
 using MyStudentsApp.Services;
+using MyStudentsApp.Services.Notifications;
 
 namespace MyStudentsApp;
 
@@ -6,13 +7,18 @@ public partial class AppMainShell : Shell
 {
     private readonly AuthorizationService _authService;
     private readonly IGestionUsuarioServiceApp _gestionService;
+    private readonly INotificationNavigationService _notificationNavigationService;
 
-    public AppMainShell(AuthorizationService authService, IGestionUsuarioServiceApp gestionService)
+    public AppMainShell(
+        AuthorizationService authService,
+        IGestionUsuarioServiceApp gestionService,
+        INotificationNavigationService notificationNavigationService)
     {
         InitializeComponent();
 
         _authService = authService;
         _gestionService = gestionService;
+        _notificationNavigationService = notificationNavigationService;
 
         // Registrar rutas para navegación programática
         RegisterRoutes();
@@ -22,6 +28,8 @@ public partial class AppMainShell : Shell
 
         // Configurar visibilidad inicial
         ConfigureVisibility();
+
+        _notificationNavigationService.MarkShellReady();
     }
 
     private void RegisterRoutes()

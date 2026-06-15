@@ -1,4 +1,5 @@
 using MyStudentsApp.DbContext;
+using MyStudentsApp.Services.Notifications;
 using System.Diagnostics;
 
 namespace MyStudentsApp
@@ -16,6 +17,9 @@ namespace MyStudentsApp
                 InitializeComponent();
 
                 Services = serviceProvider;
+
+                var oneSignalService = Services.GetRequiredService<IOneSignalMauiService>();
+                oneSignalService.InitializeAsync().GetAwaiter().GetResult();
 
                 Debug.WriteLine("[APP] ✅ App inicializada correctamente");
             }

@@ -5,6 +5,7 @@ using MyStudentsApp.MVVM.Models.SkiaControls;
 using MyStudentsApp.MVVM.ViewModels;
 using MyStudentsApp.MVVM.Views;
 using MyStudentsApp.MVVM.Views.Formularios;
+using MyStudentsApp.Services.Notifications;
 using MyStudentsApp.Services;
 using MyStudentsApp.Shared.Services;
 using SkiaSharp.Views.Maui.Controls.Hosting;
@@ -36,6 +37,9 @@ namespace MyStudentsApp
             builder.Services.AddScoped<ChatService>();
             builder.Services.AddSingleton<IFormFactor, FormFactor>();
             builder.Services.AddScoped<IGestionUsuarioServiceApp, GestionUsuariosServiceApp>();
+            builder.Services.AddSingleton<IOneSignalMauiService, OneSignalMauiService>();
+            builder.Services.AddSingleton<INotificationNavigationService, NotificationNavigationService>();
+            builder.Services.AddScoped<INotificationDeviceService, NotificationDeviceService>();
 
             // *** NUEVO: Servicio de autorización ***
             builder.Services.AddSingleton<AuthorizationService>();
