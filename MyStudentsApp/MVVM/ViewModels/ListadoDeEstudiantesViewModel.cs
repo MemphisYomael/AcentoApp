@@ -1,8 +1,3 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Input;
 using MyStudentsApp.Services;
 using MyStudentsApp.Shared.DTOShared;
@@ -13,369 +8,51 @@ namespace MyStudentsApp.MVVM.ViewModels
     [AddINotifyPropertyChangedInterface]
     public class ListadoDeEstudiantesViewModel
     {
-        public string titulo { get; set; }
-        public List<EstudianteResponseDTO> Estudiantes { get; set; } = new List<EstudianteResponseDTO>();
-        public List<EstudianteResponseDTO> EstudiantesFiltrados { get; set; } = new List<EstudianteResponseDTO>();
-        private readonly IGestionUsuarioServiceApp _gestionUsuarioService;
+        public string titulo { get; set; } = "Listado de estudiantes";
+        public List<EstudianteResponseDTO> Estudiantes { get; set; } = new();
+        public List<EstudianteResponseDTO> EstudiantesFiltrados { get; set; } = new();
         public ICommand buscar { get; set; }
+        public string? ErrorCarga { get; set; }
+
+        private readonly IGestionUsuarioServiceApp _gestionUsuarioService;
 
         public ListadoDeEstudiantesViewModel(IGestionUsuarioServiceApp gestionUsuarioService)
         {
-            
             _gestionUsuarioService = gestionUsuarioService;
-
+            buscar = new Command<string>(BuscarEstudiantes);
         }
 
         public async Task ObtenerEstudiantes()
         {
-                    var estu = await _gestionUsuarioService.ObtenerEstudiantesAsync();
-                    Estudiantes = estu ?? new List<EstudianteResponseDTO>
+            try
             {
-                new EstudianteResponseDTO
-                {
-                   apellidos = "Pérez",
-                   contrasena = "123456",
-                   cumpleanos = new DateTime(2000, 1, 1),
-                   Email = "",
-                   estudianteId = 1,
-                   nombres = "Juan",
-                   PhoneNumber = "1234567890",
-                   schoolId = 1,
-                   usuarioId = "user1",
-                   usuarioValidado = true,
-                   curso = "10th Grade"
-                },
-                new EstudianteResponseDTO
-                {
-                   apellidos = "",
-                   contrasena = "123456",
-                   cumpleanos = new DateTime(2000, 1, 1),
-                   Email = "",
-                   estudianteId = 1,
-                   nombres = "Aurorita",
-                   PhoneNumber = "1234567890",
-                   schoolId = 1,
-                   usuarioId = "user1",
-                   usuarioValidado = true,
-                   curso = "10th Grade"
-                },
-                new EstudianteResponseDTO
-                {
-                   apellidos = "Mercedez",
-                   contrasena = "123456",
-                   cumpleanos = new DateTime(2000, 1, 1),
-                   Email = "",
-                   estudianteId = 1,
-                   nombres = "Mario",
-                   PhoneNumber = "1234567890",
-                   schoolId = 1,
-                   usuarioId = "user1",
-                   usuarioValidado = true,
-                   curso = "10th Grade"
-                },
-
-                new EstudianteResponseDTO
-                {
-                   apellidos = "Pérez",
-                   contrasena = "123456",
-                   cumpleanos = new DateTime(2000, 1, 1),
-                   Email = "",
-                   estudianteId = 1,
-                   nombres = "Juan",
-                   PhoneNumber = "1234567890",
-                   schoolId = 1,
-                   usuarioId = "user1",
-                   usuarioValidado = true,
-                   curso = "10th Grade"
-                },
-                new EstudianteResponseDTO
-                {
-                   apellidos = "",
-                   contrasena = "123456",
-                   cumpleanos = new DateTime(2000, 1, 1),
-                   Email = "",
-                   estudianteId = 1,
-                   nombres = "Aurorita",
-                   PhoneNumber = "1234567890",
-                   schoolId = 1,
-                   usuarioId = "user1",
-                   usuarioValidado = true,
-                   curso = "10th Grade"
-                },
-                new EstudianteResponseDTO
-                {
-                   apellidos = "Mercedez",
-                   contrasena = "123456",
-                   cumpleanos = new DateTime(2000, 1, 1),
-                   Email = "",
-                   estudianteId = 1,
-                   nombres = "Mario",
-                   PhoneNumber = "1234567890",
-                   schoolId = 1,
-                   usuarioId = "user1",
-                   usuarioValidado = true,
-                   curso = "10th Grade"
-                },
-new EstudianteResponseDTO
-                {
-                   apellidos = "Pérez",
-                   contrasena = "123456",
-                   cumpleanos = new DateTime(2000, 1, 1),
-                   Email = "",
-                   estudianteId = 1,
-                   nombres = "Juan",
-                   PhoneNumber = "1234567890",
-                   schoolId = 1,
-                   usuarioId = "user1",
-                   usuarioValidado = true,
-                   curso = "10th Grade"
-                },
-                new EstudianteResponseDTO
-                {
-                   apellidos = "",
-                   contrasena = "123456",
-                   cumpleanos = new DateTime(2000, 1, 1),
-                   Email = "",
-                   estudianteId = 1,
-                   nombres = "Aurorita",
-                   PhoneNumber = "1234567890",
-                   schoolId = 1,
-                   usuarioId = "user1",
-                   usuarioValidado = true,
-                   curso = "10th Grade"
-                },
-                new EstudianteResponseDTO
-                {
-                   apellidos = "Mercedez",
-                   contrasena = "123456",
-                   cumpleanos = new DateTime(2000, 1, 1),
-                   Email = "",
-                   estudianteId = 1,
-                   nombres = "Mario",
-                   PhoneNumber = "1234567890",
-                   schoolId = 1,
-                   usuarioId = "user1",
-                   usuarioValidado = true,
-                   curso = "10th Grade"
-                },
-new EstudianteResponseDTO
-                {
-                   apellidos = "Pérez",
-                   contrasena = "123456",
-                   cumpleanos = new DateTime(2000, 1, 1),
-                   Email = "",
-                   estudianteId = 1,
-                   nombres = "Juan",
-                   PhoneNumber = "1234567890",
-                   schoolId = 1,
-                   usuarioId = "user1",
-                   usuarioValidado = true,
-                   curso = "10th Grade"
-                },
-                new EstudianteResponseDTO
-                {
-                   apellidos = "",
-                   contrasena = "123456",
-                   cumpleanos = new DateTime(2000, 1, 1),
-                   Email = "",
-                   estudianteId = 1,
-                   nombres = "Aurorita",
-                   PhoneNumber = "1234567890",
-                   schoolId = 1,
-                   usuarioId = "user1",
-                   usuarioValidado = true,
-                   curso = "10th Grade"
-                },
-                new EstudianteResponseDTO
-                {
-                   apellidos = "Mercedez",
-                   contrasena = "123456",
-                   cumpleanos = new DateTime(2000, 1, 1),
-                   Email = "",
-                   estudianteId = 1,
-                   nombres = "Mario",
-                   PhoneNumber = "1234567890",
-                   schoolId = 1,
-                   usuarioId = "user1",
-                   usuarioValidado = true,
-                   curso = "10th Grade"
-                },
-
-            };
-                    EstudiantesFiltrados = Estudiantes ?? new List<EstudianteResponseDTO>
+                ErrorCarga = null;
+                var estudiantes = await _gestionUsuarioService.ObtenerEstudiantesAsync();
+                Estudiantes = estudiantes ?? new List<EstudianteResponseDTO>();
+                EstudiantesFiltrados = Estudiantes.ToList();
+            }
+            catch (Exception ex)
             {
-                new EstudianteResponseDTO
-                {
-                   apellidos = "Pérez",
-                   contrasena = "123456",
-                   cumpleanos = new DateTime(2000, 1, 1),
-                   Email = "",
-                   estudianteId = 1,
-                   nombres = "Juan",
-                   PhoneNumber = "1234567890",
-                   schoolId = 1,
-                   usuarioId = "user1",
-                   usuarioValidado = true,
-                   curso = "10th Grade"
-                },
-                new EstudianteResponseDTO
-                {
-                   apellidos = "",
-                   contrasena = "123456",
-                   cumpleanos = new DateTime(2000, 1, 1),
-                   Email = "",
-                   estudianteId = 1,
-                   nombres = "Aurorita",
-                   PhoneNumber = "1234567890",
-                   schoolId = 1,
-                   usuarioId = "user1",
-                   usuarioValidado = true,
-                   curso = "10th Grade"
-                },
-                new EstudianteResponseDTO
-                {
-                   apellidos = "Mercedez",
-                   contrasena = "123456",
-                   cumpleanos = new DateTime(2000, 1, 1),
-                   Email = "",
-                   estudianteId = 1,
-                   nombres = "Mario",
-                   PhoneNumber = "1234567890",
-                   schoolId = 1,
-                   usuarioId = "user1",
-                   usuarioValidado = true,
-                   curso = "10th Grade"
-                },
+                Estudiantes = new List<EstudianteResponseDTO>();
+                EstudiantesFiltrados = new List<EstudianteResponseDTO>();
+                ErrorCarga = $"Error al cargar estudiantes: {ex.Message}";
+            }
+        }
 
-                new EstudianteResponseDTO
-                {
-                   apellidos = "Pérez",
-                   contrasena = "123456",
-                   cumpleanos = new DateTime(2000, 1, 1),
-                   Email = "",
-                   estudianteId = 1,
-                   nombres = "Juan",
-                   PhoneNumber = "1234567890",
-                   schoolId = 1,
-                   usuarioId = "user1",
-                   usuarioValidado = true,
-                   curso = "10th Grade"
-                },
-                new EstudianteResponseDTO
-                {
-                   apellidos = "",
-                   contrasena = "123456",
-                   cumpleanos = new DateTime(2000, 1, 1),
-                   Email = "",
-                   estudianteId = 1,
-                   nombres = "Aurorita",
-                   PhoneNumber = "1234567890",
-                   schoolId = 1,
-                   usuarioId = "user1",
-                   usuarioValidado = true,
-                   curso = "10th Grade"
-                },
-                new EstudianteResponseDTO
-                {
-                   apellidos = "Mercedez",
-                   contrasena = "123456",
-                   cumpleanos = new DateTime(2000, 1, 1),
-                   Email = "",
-                   estudianteId = 1,
-                   nombres = "Mario",
-                   PhoneNumber = "1234567890",
-                   schoolId = 1,
-                   usuarioId = "user1",
-                   usuarioValidado = true,
-                   curso = "10th Grade"
-                },
-new EstudianteResponseDTO
-                {
-                   apellidos = "Pérez",
-                   contrasena = "123456",
-                   cumpleanos = new DateTime(2000, 1, 1),
-                   Email = "",
-                   estudianteId = 1,
-                   nombres = "Memphis Yomael",
-                   PhoneNumber = "1234567890",
-                   schoolId = 1,
-                   usuarioId = "user1",
-                   usuarioValidado = true,
-                   curso = "10th Grade"
-                },
-                new EstudianteResponseDTO
-                {
-                   apellidos = "",
-                   contrasena = "123456",
-                   cumpleanos = new DateTime(2000, 1, 1),
-                   Email = "",
-                   estudianteId = 1,
-                   nombres = "Aurorita",
-                   PhoneNumber = "1234567890",
-                   schoolId = 1,
-                   usuarioId = "user1",
-                   usuarioValidado = true,
-                   curso = "10th Grade"
-                },
-                new EstudianteResponseDTO
-                {
-                   apellidos = "Mercedez",
-                   contrasena = "123456",
-                   cumpleanos = new DateTime(2000, 1, 1),
-                   Email = "",
-                   estudianteId = 1,
-                   nombres = "Mario",
-                   PhoneNumber = "1234567890",
-                   schoolId = 1,
-                   usuarioId = "user1",
-                   usuarioValidado = true,
-                   curso = "10th Grade"
-                },
-new EstudianteResponseDTO
-                {
-                   apellidos = "Pérez",
-                   contrasena = "123456",
-                   cumpleanos = new DateTime(2000, 1, 1),
-                   Email = "",
-                   estudianteId = 1,
-                   nombres = "Juan",
-                   PhoneNumber = "1234567890",
-                   schoolId = 1,
-                   usuarioId = "user1",
-                   usuarioValidado = true,
-                   curso = "10th Grade"
-                },
-                new EstudianteResponseDTO
-                {
-                   apellidos = "",
-                   contrasena = "123456",
-                   cumpleanos = new DateTime(2000, 1, 1),
-                   Email = "",
-                   estudianteId = 1,
-                   nombres = "Aurorita",
-                   PhoneNumber = "1234567890",
-                   schoolId = 1,
-                   usuarioId = "user1",
-                   usuarioValidado = true,
-                   curso = "10th Grade"
-                },
-                new EstudianteResponseDTO
-                {
-                   apellidos = "Mercedez",
-                   contrasena = "123456",
-                   cumpleanos = new DateTime(2000, 1, 1),
-                   Email = "",
-                   estudianteId = 1,
-                   nombres = "Mario",
-                   PhoneNumber = "1234567890",
-                   schoolId = 1,
-                   usuarioId = "user1",
-                   usuarioValidado = true,
-                   curso = "10th Grade"
-                },
+        public void BuscarEstudiantes(string? busquedaTexto)
+        {
+            if (string.IsNullOrWhiteSpace(busquedaTexto))
+            {
+                EstudiantesFiltrados = Estudiantes.ToList();
+                return;
+            }
 
-            };
-           
+            EstudiantesFiltrados = Estudiantes
+                .Where(x =>
+                    (x?.nombres ?? string.Empty).Contains(busquedaTexto, StringComparison.OrdinalIgnoreCase) ||
+                    (x?.apellidos ?? string.Empty).Contains(busquedaTexto, StringComparison.OrdinalIgnoreCase) ||
+                    (x?.curso ?? string.Empty).Contains(busquedaTexto, StringComparison.OrdinalIgnoreCase))
+                .ToList();
         }
     }
 }

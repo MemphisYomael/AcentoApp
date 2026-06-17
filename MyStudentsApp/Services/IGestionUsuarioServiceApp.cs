@@ -15,6 +15,7 @@ namespace MyStudentsApp.Services
         Task<bool> CrearUsuario(usuarioRequestDto usuarioDto);
         Task<bool> ActualizarUsuario(string id, usuarioRequestDto usuarioDto);
         Task<bool> EliminarUsuario(string id);
+        Task<List<ConversacionResponseDTO>> ObtenerConversacionesAsync();
         #endregion
 
         #region Estudiantes
@@ -56,14 +57,22 @@ namespace MyStudentsApp.Services
         Task<TareaResponseDTO> CrearTareaAsync(TareaRequestDTO tareaDto);
         Task<bool> ActualizarTareaAsync(string id, TareaRequestDTO tareaDto);
         Task<bool> EliminarTareaAsync(string id);
+        Task<bool> AsignarTareaAEstudiantes(int tareaId, List<int> estudiantesIds);
+        Task<List<TareaResponseDTO>> ObtenerTareasDeEstudiante();
+        Task<List<TareaResponseDTO>> ObtenerTareasDelProfesor();
+        Task<int> EnviarRecordatoriosVencimientoAsync();
         #endregion
 
         #region Entregas de Tareas
         Task<List<EntregaTareaResponseDTO>> ObtenerEntregasAsync(string? busqueda = null);
         Task<EntregaTareaResponseDTO> ObtenerEntregaPorIdAsync(string id);
         Task<bool> CrearEntregaAsync(EntregaTareaRequestDTO entregaDto);
+        Task<EntregaTareaResponseDTO?> CrearEntregaAsync(int tareaId, string titulo, string descripcion, FileResult? archivo);
         Task<bool> ActualizarEntregaAsync(string id, EntregaTareaRequestDTO entregaDto);
         Task<bool> EliminarEntregaAsync(string id);
+        Task<List<EntregaTareaResponseDTO>> ObtenerEntregasDeTarea(int tareaId);
+        Task<List<EntregaTareaResponseDTO>> ObtenerEntregasDelEstudiante();
+        Task<bool> CalificarEntregaAsync(int entregaId, CalificacionDTO calificacionDto);
         #endregion
 
         #region Vinculaciones

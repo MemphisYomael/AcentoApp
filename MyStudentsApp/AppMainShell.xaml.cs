@@ -36,6 +36,8 @@ public partial class AppMainShell : Shell
     {
         // Rutas adicionales
         Routing.RegisterRoute("chatZone", typeof(MVVM.Views.ChatZoneView));
+        Routing.RegisterRoute("conversaciones", typeof(MVVM.Views.ConversacionesView));
+        Routing.RegisterRoute("tareas", typeof(MVVM.Views.TareasView));
         Routing.RegisterRoute("gestionEstudiantes", typeof(MVVM.Views.GestionEstudiantesView));
         Routing.RegisterRoute("gestionProfesores", typeof(MVVM.Views.GestionProfesoresView));
         Routing.RegisterRoute("vinculaciones", typeof(MVVM.Views.VinculacionesView));
@@ -56,6 +58,8 @@ public partial class AppMainShell : Shell
 
         // Dashboard - Visible solo cuando está autenticado
         SetFlyoutItemVisibility("DashboardFlyoutItem", _authService.IsAuthenticated);
+        SetFlyoutItemVisibility("ConversacionesFlyoutItem", _authService.IsAuthenticated);
+        SetFlyoutItemVisibility("TareasFlyoutItem", _authService.IsAuthenticated);
 
         // Gestión de Usuarios
         if (_authService.IsStudent)

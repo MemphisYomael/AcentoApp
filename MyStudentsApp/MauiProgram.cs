@@ -51,6 +51,9 @@ namespace MyStudentsApp
             builder.Services.AddTransient<CrearProfesorViewModel>();
             builder.Services.AddTransient<ChatZoneViewModel>();
             builder.Services.AddTransient<ListadoDeProfesoresViewModel>();
+            builder.Services.AddTransient<DashboardViewModel>();
+            builder.Services.AddTransient<ConversacionesViewModel>();
+            builder.Services.AddTransient<TareasViewModel>();
 
             // ViewModels de gestión
             builder.Services.AddTransient<GestionProfesoresViewModel>();
@@ -66,6 +69,9 @@ namespace MyStudentsApp
             builder.Services.AddTransient<ListadoEstudiantesProfesores>();
             builder.Services.AddTransient<ListadoDeProfesores>();
             builder.Services.AddTransient<ChatZoneView>();
+            builder.Services.AddTransient<DashboardView>();
+            builder.Services.AddTransient<ConversacionesView>();
+            builder.Services.AddTransient<TareasView>();
 
             // Views de gestión
             builder.Services.AddTransient<GestionEstudiantesView>();

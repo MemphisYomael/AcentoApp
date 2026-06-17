@@ -23,99 +23,82 @@ namespace MyStudentsApp.MVVM.ViewModels
         {
             _GestionUsuarioService = gestionUsuarioService;
             EstudianteCreacionDTO = new EstudianteCreacionDTO();
-            CrearEstudianteCommand = new Command(() =>
-            {
-                try
-                {
-                    CrearEstudiante();
-                }
-                catch (Exception ex)
-                {
-                    // Manejo de excepciones, por ejemplo, mostrar un mensaje al usuario
-                    Console.WriteLine($"Error al crear estudiante: {ex.Message}");
-                }
-            });
+            CrearEstudianteCommand = new Command(async () => await CrearEstudiante());
         }
 
-        public void CrearEstudiante()
+        public async Task CrearEstudiante()
         {
-            if (EstudianteCreacionDTO.nombres == null)
+            if (string.IsNullOrWhiteSpace(EstudianteCreacionDTO.nombres))
             {
-                throw new ArgumentNullException(nameof(EstudianteCreacionDTO), "El DTO de creación de estudiante no puede ser nulo.");
+                await MostrarError("Debe indicar los nombres del estudiante.");
+                return;
             }
 
-            if (EstudianteCreacionDTO.apellidos == null)
+            if (string.IsNullOrWhiteSpace(EstudianteCreacionDTO.apellidos))
             {
-                throw new ArgumentNullException(nameof(EstudianteCreacionDTO), "El DTO de creación de estudiante no puede ser nulo.");
+                await MostrarError("Debe indicar los apellidos del estudiante.");
+                return;
             }
-            if (EstudianteCreacionDTO.contrasena == null)
+            if (string.IsNullOrWhiteSpace(EstudianteCreacionDTO.contrasena))
             {
-                throw new ArgumentNullException(nameof(EstudianteCreacionDTO), "El DTO de creación de estudiante no puede ser nulo.");
+                await MostrarError("Debe indicar una contraseña para el estudiante.");
+                return;
             }
-            if (EstudianteCreacionDTO.Email == null)
+            if (string.IsNullOrWhiteSpace(EstudianteCreacionDTO.Email))
             {
-                throw new ArgumentNullException(nameof(EstudianteCreacionDTO), "El DTO de creación de estudiante no puede ser nulo.");
+                await MostrarError("Debe indicar el correo del estudiante.");
+                return;
             }
-            if(EstudianteCreacionDTO.PhoneNumber == null)
+            if (string.IsNullOrWhiteSpace(EstudianteCreacionDTO.PhoneNumber))
             {
-                throw new ArgumentNullException(nameof(EstudianteCreacionDTO), "El DTO de creación de estudiante no puede ser nulo.");
+                await MostrarError("Debe indicar el teléfono del estudiante.");
+                return;
             }
 
-            _GestionUsuarioService.CrearEstudianteAsync(EstudianteCreacionDTO)
-                .ContinueWith(async (task) =>
+            try
+            {
+                var estudianteCreado = await _GestionUsuarioService.CrearEstudianteAsync(EstudianteCreacionDTO);
+                if (estudianteCreado == null)
                 {
-                    if (task.Result == null)
-                    {
+                    await MostrarError("No se logró crear el estudiante. Verifica los datos, la conexión y que el usuario tenga una escuela asignada.");
+                    return;
+                }
+
 #if !WINDOWS
-                        var snackbar = Snackbar.Make(
-                        "Error al Crear el estudiante",
-                        action: async () => await App.Current.Windows[0].Page.DisplayAlert("Error", "Por favor, intentalo de nuevo, trata de llenar todos los campos, o verifica tu conexion a internet.", "Ok"),
-                        actionButtonText: "Click",
-                        duration: TimeSpan.FromSeconds(3),
-                        visualOptions: new SnackbarOptions
-                        {
-                            BackgroundColor = Colors.DarkRed,
-                            TextColor = Colors.White,
-                            ActionButtonTextColor = Colors.Yellow,
-                            CornerRadius = 10,
-                        });
-
-                        await snackbar.Show();
-#else
-await MainThread.InvokeOnMainThreadAsync(async () =>
-{
-                        await App.Current.MainPage.DisplayAlert("Estudiante Creado Correctamente", "Puedes irte o crear mas estudiantes!!!", "De Acuerdo!");
-                        });
-#endif
-
-                        // Lógica adicional después de crear el estudiante, como navegar a otra vista o mostrar un mensaje de éxito
-                    }
-                    else
-                    {
-#if !WINDOWS
-                        var snackbar = Snackbar.Make(
-                        "Estudiante Creado Correctamente",
-                        action: async () => await Application.Current.Windows[0].Page.DisplayAlert("Elige que quieres hacer ahora", "Puedes irte o crear mas estudiantes!!!", "De Acuerdo!"),
-                        actionButtonText: "Click",
-                        duration: TimeSpan.FromSeconds(3),
-                        visualOptions: new SnackbarOptions
-                        {
-                            BackgroundColor = Colors.DarkSlateBlue,
-                            TextColor = Colors.White,
-                            ActionButtonTextColor = Colors.Yellow,
-                            CornerRadius = 10,
-                        });
-
-                        await snackbar.Show();
-#else
-await MainThread.InvokeOnMainThreadAsync(async () =>
-{
-                            await App.Current.MainPage.DisplayAlert("Estudiante Creado Correctamente", "Puedes irte o crear mas estudiantes!!!", "De Acuerdo!");
-                            });
-#endif
-                        // Lógica adicional después de crear el estudiante, como navegar a otra vista o mostrar un mensaje de éxito
-                    }
+                var snackbar = Snackbar.Make(
+                "Estudiante Creado Correctamente",
+                action: async () => await Application.Current.Windows[0].Page.DisplayAlert("Elige que quieres hacer ahora", "Puedes irte o crear mas estudiantes!!!", "De Acuerdo!"),
+                actionButtonText: "Click",
+                duration: TimeSpan.FromSeconds(3),
+                visualOptions: new SnackbarOptions
+                {
+                    BackgroundColor = Colors.DarkSlateBlue,
+                    TextColor = Colors.White,
+                    ActionButtonTextColor = Colors.Yellow,
+                    CornerRadius = 10,
                 });
+
+                await snackbar.Show();
+#else
+                await MainThread.InvokeOnMainThreadAsync(async () =>
+                {
+                    await App.Current.MainPage.DisplayAlert("Estudiante Creado Correctamente", "Puedes irte o crear mas estudiantes!!!", "De Acuerdo!");
+                });
+#endif
+                EstudianteCreacionDTO = new EstudianteCreacionDTO();
+            }
+            catch (Exception ex)
+            {
+                await MostrarError($"Error al crear estudiante: {ex.Message}");
+            }
+        }
+
+        private static async Task MostrarError(string mensaje)
+        {
+            await MainThread.InvokeOnMainThreadAsync(async () =>
+            {
+                await App.Current.MainPage.DisplayAlert("Error", mensaje, "Ok");
+            });
         }
     }
 }

@@ -58,6 +58,19 @@ public sealed class NotificationNavigationService : INotificationNavigationServi
 
     private static async Task NavigateAsync(IDictionary<string, object> data)
     {
+        var type = GetString(data, "type");
+        if (type is "homework_assigned" or "homework_submitted" or "homework_graded" or "homework_due_soon")
+        {
+            await MainThread.InvokeOnMainThreadAsync(async () =>
+            {
+                if (Shell.Current != null)
+                {
+                    await Shell.Current.GoToAsync("tareas");
+                }
+            });
+            return;
+        }
+
         var senderId = GetString(data, "senderId") ?? GetString(data, "conversationId");
         var senderName = GetString(data, "senderName") ?? "Nuevo mensaje";
         if (string.IsNullOrWhiteSpace(senderId) || Shell.Current == null)

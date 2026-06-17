@@ -90,17 +90,59 @@ public partial class ChatZoneView : ContentPage
                 new Border
                 {
                     BackgroundColor = Colors.White,
-                    Padding = 15,
+                    Padding = 12,
                     StrokeShape = new RoundRectangle
                     {
                         CornerRadius = new CornerRadius(10)
                     },
-                    Content = _headerLabel
+                    Content = new Grid
+                    {
+                        ColumnDefinitions = new ColumnDefinitionCollection
+                        {
+                            new ColumnDefinition(GridLength.Auto),
+                            new ColumnDefinition(GridLength.Star)
+                        },
+                        RowDefinitions = new RowDefinitionCollection
+                        {
+                            new RowDefinition(GridLength.Auto),
+                            new RowDefinition(GridLength.Auto)
+                        },
+                        Children =
+                        {
+                            new Button
+                            {
+                                Text = "‹",
+                                FontSize = 22,
+                                WidthRequest = 42,
+                                HeightRequest = 38,
+                                Padding = 0,
+                                BackgroundColor = Color.FromArgb("#EAF2F8"),
+                                TextColor = Colors.Black,
+                                CornerRadius = 8,
+                                Command = new Command(async () => await Shell.Current.GoToAsync(".."))
+                            }.Row(0).Column(0).RowSpan(2),
+                            _headerLabel.Row(0).Column(1),
+                            new Label
+                            {
+                                FontSize = 11,
+                                TextColor = Color.FromArgb("#1F7A8C"),
+                                HorizontalOptions = LayoutOptions.Center
+                            }.Bind(Label.TextProperty, nameof(ChatZoneViewModel.StatusMessage))
+                             .Row(1).Column(1)
+                        }
+                    }
                 }.Row(0),
 
                 // CollectionView para mensajes
                 new CollectionView
                 {
+                    EmptyView = new Label
+                    {
+                        Text = "Aún no hay mensajes.",
+                        TextColor = Colors.White,
+                        HorizontalOptions = LayoutOptions.Center,
+                        VerticalOptions = LayoutOptions.Center
+                    },
                     ItemTemplate = new DataTemplate(() =>
                     {
                         var border = new Border()

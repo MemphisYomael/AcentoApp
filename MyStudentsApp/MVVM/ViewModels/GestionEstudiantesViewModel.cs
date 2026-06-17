@@ -160,20 +160,26 @@ namespace MyStudentsApp.MVVM.ViewModels
                 if (EsNuevoEstudiante)
                 {
                     var nuevoEstudiante = await _gestionUsuarioService.CrearEstudianteAsync(estudianteDto);
-                    if (nuevoEstudiante != null)
+                    if (nuevoEstudiante == null)
                     {
-                        await CargarEstudiantes();
-                        await Application.Current.MainPage.DisplayAlert("Éxito", "Estudiante creado correctamente", "OK");
+                        await Application.Current.MainPage.DisplayAlert("Error", "No se pudo crear el estudiante", "OK");
+                        return;
                     }
+
+                    await CargarEstudiantes();
+                    await Application.Current.MainPage.DisplayAlert("Éxito", "Estudiante creado correctamente", "OK");
                 }
                 else if (EstudianteSeleccionado != null)
                 {
                     var resultado = await _gestionUsuarioService.ActualizarEstudianteAsync(EstudianteSeleccionado.estudianteId.ToString(), estudianteDto);
-                    if (resultado)
+                    if (!resultado)
                     {
-                        await CargarEstudiantes();
-                        await Application.Current.MainPage.DisplayAlert("Éxito", "Estudiante actualizado correctamente", "OK");
+                        await Application.Current.MainPage.DisplayAlert("Error", "No se pudo actualizar el estudiante", "OK");
+                        return;
                     }
+
+                    await CargarEstudiantes();
+                    await Application.Current.MainPage.DisplayAlert("Éxito", "Estudiante actualizado correctamente", "OK");
                 }
 
                 MostrarFormularioEdicion = false;
