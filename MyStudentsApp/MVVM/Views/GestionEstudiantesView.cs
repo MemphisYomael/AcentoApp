@@ -86,6 +86,12 @@ public class GestionEstudiantesView : ContentPage
         };
     }
 
+    protected override async void OnAppearing()
+    {
+        base.OnAppearing();
+        await _viewModel.CargarEstudiantes();
+    }
+
     private Border CrearListaEstudiantes()
     {
         return new Border

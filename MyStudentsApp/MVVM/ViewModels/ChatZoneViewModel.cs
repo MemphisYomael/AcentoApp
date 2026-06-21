@@ -18,6 +18,9 @@ namespace MyStudentsApp.MVVM.ViewModels
         public ObservableCollection<MensajeResponseDTO> Mensajes { get; set; }
         public ChatService _ChatService { get; set; }
         public string textoEscritoInput { get; set; }
+        public bool IsConnected { get; set; }
+        public bool IsSending { get; set; }
+        public string StatusMessage { get; set; } = "Conectando...";
         
         private bool _eventosRegistrados = false;
         private string _currentRecipientId;
@@ -44,6 +47,8 @@ namespace MyStudentsApp.MVVM.ViewModels
 
                 // Asegurar conexión
                 await _ChatService.InitializeConnectionAsync();
+                IsConnected = _ChatService.IsConnected;
+                StatusMessage = IsConnected ? "En línea" : "Sin conexión. Reintentando al enviar.";
 
                 // Solicitar mensajes
                 await _ChatService.ObtenerAllMessages(recipientId);
@@ -51,6 +56,8 @@ namespace MyStudentsApp.MVVM.ViewModels
             catch (Exception ex)
             {
                 Debug.WriteLine($"[CHAT_VM] ❌ Error trayendo mensajes: {ex.Message}");
+                IsConnected = false;
+                StatusMessage = "No se pudo cargar el chat.";
             }
         }
 
@@ -143,15 +150,24 @@ namespace MyStudentsApp.MVVM.ViewModels
                 }
 
                 Debug.WriteLine($"[CHAT_VM] 📤 Enviando mensaje: {textoEscritoInput}");
+                IsSending = true;
+                StatusMessage = "Enviando...";
                 await _ChatService.SendMessageTo(recipientId, textoEscritoInput);
+                IsConnected = _ChatService.IsConnected;
                 
                 // Limpiar el campo de texto después de enviar
                 textoEscritoInput = string.Empty;
+                StatusMessage = IsConnected ? "En línea" : "Mensaje pendiente de conexión.";
                 Debug.WriteLine("[CHAT_VM] ✅ Mensaje enviado y texto limpiado");
             }
             catch (Exception ex)
             {
                 Debug.WriteLine($"[CHAT_VM] ❌ Error enviando mensaje: {ex.Message}");
+                StatusMessage = "No se pudo enviar. Intenta de nuevo.";
+            }
+            finally
+            {
+                IsSending = false;
             }
         }
 

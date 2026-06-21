@@ -177,44 +177,12 @@ public class ListadoEstudiantesProfesores : ContentPage
 		};
 	}
 
-    protected override void OnAppearing()
+    protected override async void OnAppearing()
     {
         if (BindingContext is ListadoDeEstudiantesViewModel viewModel)
         {
-
-            viewModel.buscar = new Command((SearchText) =>
-            {
-                string busquedaTexto = (string)SearchText;
-
-                if (string.IsNullOrEmpty(busquedaTexto))
-                {
-                    viewModel.EstudiantesFiltrados = viewModel.Estudiantes;
-                    return;
-                }
-                try
-                {
-                    var listaFiltrada = viewModel.Estudiantes
-                     .Where(x =>
-                         (x?.nombres ?? string.Empty).Contains(busquedaTexto, StringComparison.OrdinalIgnoreCase) ||
-                         (x?.apellidos ?? string.Empty).Contains(busquedaTexto, StringComparison.OrdinalIgnoreCase) ||
-                         (x?.curso ?? string.Empty).Contains(busquedaTexto, StringComparison.OrdinalIgnoreCase)
-                     )
-                     .ToList();
-
-
-                    viewModel.EstudiantesFiltrados = listaFiltrada;
-                }
-                catch (Exception ex)
-                {
-                    viewModel.EstudiantesFiltrados = new List<EstudianteResponseDTO>();
-                }
-            });
             viewModel.titulo = "Listado de estudiantes";
-
-            viewModel.ObtenerEstudiantes();
-
-            viewModel.EstudiantesFiltrados = viewModel.Estudiantes;
-            // Lógica adicional si es necesaria
+            await viewModel.ObtenerEstudiantes();
         }
         base.OnAppearing();
     }

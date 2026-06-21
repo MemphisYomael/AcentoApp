@@ -1,4 +1,5 @@
 using MyStudentsApp.Services;
+using MyStudentsApp.Services.Notifications;
 
 namespace MyStudentsApp;
 
@@ -6,13 +7,18 @@ public partial class AppMainShell : Shell
 {
     private readonly AuthorizationService _authService;
     private readonly IGestionUsuarioServiceApp _gestionService;
+    private readonly INotificationNavigationService _notificationNavigationService;
 
-    public AppMainShell(AuthorizationService authService, IGestionUsuarioServiceApp gestionService)
+    public AppMainShell(
+        AuthorizationService authService,
+        IGestionUsuarioServiceApp gestionService,
+        INotificationNavigationService notificationNavigationService)
     {
         InitializeComponent();
 
         _authService = authService;
         _gestionService = gestionService;
+        _notificationNavigationService = notificationNavigationService;
 
         // Registrar rutas para navegación programática
         RegisterRoutes();
@@ -22,12 +28,16 @@ public partial class AppMainShell : Shell
 
         // Configurar visibilidad inicial
         ConfigureVisibility();
+
+        _notificationNavigationService.MarkShellReady();
     }
 
     private void RegisterRoutes()
     {
         // Rutas adicionales
         Routing.RegisterRoute("chatZone", typeof(MVVM.Views.ChatZoneView));
+        Routing.RegisterRoute("conversaciones", typeof(MVVM.Views.ConversacionesView));
+        Routing.RegisterRoute("tareas", typeof(MVVM.Views.TareasView));
         Routing.RegisterRoute("gestionEstudiantes", typeof(MVVM.Views.GestionEstudiantesView));
         Routing.RegisterRoute("gestionProfesores", typeof(MVVM.Views.GestionProfesoresView));
         Routing.RegisterRoute("vinculaciones", typeof(MVVM.Views.VinculacionesView));
@@ -48,6 +58,8 @@ public partial class AppMainShell : Shell
 
         // Dashboard - Visible solo cuando está autenticado
         SetFlyoutItemVisibility("DashboardFlyoutItem", _authService.IsAuthenticated);
+        SetFlyoutItemVisibility("ConversacionesFlyoutItem", _authService.IsAuthenticated);
+        SetFlyoutItemVisibility("TareasFlyoutItem", _authService.IsAuthenticated);
 
         // Gestión de Usuarios
         if (_authService.IsStudent)

@@ -137,6 +137,11 @@ namespace MyStudentsApp.Services
 
         public async Task<UsuarioResponseDto> ObtenerUsuarioPorIdAsync(string id) => await GetAsync<UsuarioResponseDto>($"obtenerUsuario/{id}");
 
+        public async Task<List<ConversacionResponseDTO>> ObtenerConversacionesAsync()
+        {
+            return await GetAsync<List<ConversacionResponseDTO>>("obtenerConversaciones") ?? new List<ConversacionResponseDTO>();
+        }
+
         public async Task<bool> CrearUsuario(usuarioRequestDto usuarioDto)
         {
             var response = await PostAsync<usuarioRequestDto, UsuarioResponseDto>("crearUsuario", usuarioDto);
@@ -155,7 +160,30 @@ namespace MyStudentsApp.Services
 
         public async Task<EstudianteResponseDTO> ObtenerEstudiantePorIdAsync(string id) => await GetAsync<EstudianteResponseDTO>($"obtenerEstudiante/{id}");
 
-        public async Task<EstudianteResponseDTO> CrearEstudianteAsync(EstudianteCreacionDTO estudianteDto) => await PostAsync<EstudianteCreacionDTO, EstudianteResponseDTO>("crearEstudiante", estudianteDto);
+        public async Task<EstudianteResponseDTO> CrearEstudianteAsync(EstudianteCreacionDTO estudianteDto)
+        {
+            try
+            {
+                SetAuthorizationHeader();
+                var content = new StringContent(JsonSerializer.Serialize(estudianteDto), Encoding.UTF8, "application/json");
+                var response = await _httpClient.PostAsync("crearEstudiante", content);
+                var responseText = await response.Content.ReadAsStringAsync();
+
+                if (!response.IsSuccessStatusCode)
+                {
+                    throw new InvalidOperationException(string.IsNullOrWhiteSpace(responseText)
+                        ? "No se logró crear el estudiante."
+                        : responseText);
+                }
+
+                return JsonSerializer.Deserialize<EstudianteResponseDTO>(responseText, _serializerOptions);
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Error en POST crearEstudiante: {ex}");
+                throw;
+            }
+        }
 
         public async Task<bool> ActualizarEstudianteAsync(string id, EstudianteCreacionDTO estudianteDto) => await PutAsync($"actualizarEstudiante/{id}", estudianteDto);
 
@@ -219,7 +247,36 @@ namespace MyStudentsApp.Services
 
         public async Task<TareaResponseDTO> ObtenerTareaPorIdAsync(string id) => await GetAsync<TareaResponseDTO>($"obtenerTarea/{id}");
 
-        public async Task<TareaResponseDTO> CrearTareaAsync(TareaRequestDTO tareaDto) => await PostAsync<TareaRequestDTO, TareaResponseDTO>("crearTarea", tareaDto);
+        public async Task<TareaResponseDTO> CrearTareaAsync(TareaRequestDTO tareaDto)
+        {
+            try
+            {
+                SetAuthorizationHeader();
+                var content = new StringContent(JsonSerializer.Serialize(tareaDto), Encoding.UTF8, "application/json");
+                var response = await _httpClient.PostAsync("crearTarea", content);
+                var responseText = await response.Content.ReadAsStringAsync();
+
+                if (!response.IsSuccessStatusCode)
+                {
+                    throw new InvalidOperationException(string.IsNullOrWhiteSpace(responseText)
+                        ? $"No se pudo crear la tarea. Código HTTP {(int)response.StatusCode}."
+                        : responseText);
+                }
+
+                var tarea = JsonSerializer.Deserialize<TareaResponseDTO>(responseText, _serializerOptions);
+                if (tarea == null)
+                {
+                    throw new InvalidOperationException("El servidor no devolvió una tarea válida.");
+                }
+
+                return tarea;
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Error en POST crearTarea: {ex}");
+                throw;
+            }
+        }
 
         public async Task<bool> ActualizarTareaAsync(string id, TareaRequestDTO tareaDto) => await PutAsync($"actualizarTarea/{id}", tareaDto);
 
@@ -251,6 +308,30 @@ namespace MyStudentsApp.Services
             return await GetAsync<List<TareaResponseDTO>>("obtenerTareasDelProfesor") ?? new List<TareaResponseDTO>();
         }
 
+        public async Task<int> EnviarRecordatoriosVencimientoAsync()
+        {
+            try
+            {
+                SetAuthorizationHeader();
+                var response = await _httpClient.PostAsync("enviarRecordatoriosVencimiento", null);
+                if (!response.IsSuccessStatusCode)
+                {
+                    return 0;
+                }
+
+                using var stream = await response.Content.ReadAsStreamAsync();
+                using var document = await JsonDocument.ParseAsync(stream);
+                return document.RootElement.TryGetProperty("enviados", out var enviados)
+                    ? enviados.GetInt32()
+                    : 0;
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Error al enviar recordatorios: {ex}");
+                return 0;
+            }
+        }
+
         #endregion
 
         #region Entregas de Tareas
@@ -265,9 +346,57 @@ namespace MyStudentsApp.Services
             return response != null;
         }
 
+        public async Task<EntregaTareaResponseDTO?> CrearEntregaAsync(int tareaId, string titulo, string descripcion, FileResult? archivo)
+        {
+            try
+            {
+                SetAuthorizationHeader();
+                using var content = new MultipartFormDataContent();
+                content.Add(new StringContent(titulo ?? string.Empty), "Titulo");
+                content.Add(new StringContent(descripcion ?? string.Empty), "Descripcion");
+
+                if (archivo != null)
+                {
+                    var stream = await archivo.OpenReadAsync();
+                    var fileContent = new StreamContent(stream);
+                    fileContent.Headers.ContentType = new MediaTypeHeaderValue(archivo.ContentType ?? "application/octet-stream");
+                    content.Add(fileContent, "File", archivo.FileName);
+                }
+
+                var response = await _httpClient.PostAsync($"crearEntrega/{tareaId}", content);
+                if (!response.IsSuccessStatusCode)
+                {
+                    return null;
+                }
+
+                var contentStream = await response.Content.ReadAsStreamAsync();
+                return await JsonSerializer.DeserializeAsync<EntregaTareaResponseDTO>(contentStream, _serializerOptions);
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Error al crear entrega multipart: {ex}");
+                return null;
+            }
+        }
+
         public async Task<bool> ActualizarEntregaAsync(string id, EntregaTareaRequestDTO entregaDto) => await PutAsync($"actualizarEntrega/{id}", entregaDto);
 
         public async Task<bool> EliminarEntregaAsync(string id) => await DeleteAsync($"eliminarEntrega/{id}");
+
+        public async Task<List<EntregaTareaResponseDTO>> ObtenerEntregasDeTarea(int tareaId)
+        {
+            return await GetAsync<List<EntregaTareaResponseDTO>>($"obtenerEntregasDeTarea/{tareaId}") ?? new List<EntregaTareaResponseDTO>();
+        }
+
+        public async Task<List<EntregaTareaResponseDTO>> ObtenerEntregasDelEstudiante()
+        {
+            return await GetAsync<List<EntregaTareaResponseDTO>>("obtenerEntregasDelEstudiante") ?? new List<EntregaTareaResponseDTO>();
+        }
+
+        public async Task<bool> CalificarEntregaAsync(int entregaId, CalificacionDTO calificacionDto)
+        {
+            return await PutAsync($"calificarEntrega/{entregaId}", calificacionDto);
+        }
 
         #endregion
 

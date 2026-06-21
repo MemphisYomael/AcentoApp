@@ -6,7 +6,6 @@
              xmlns:formularios="clr-namespace:MyStudentsApp.MVVM.Views.Formularios"
              x:Class="MyStudentsApp.AppMainShell"   
              Title="HI Teacher"     
-             FlyoutIcon="menu_dark.png"
              FlyoutVerticalScrollMode="Auto"
              BackgroundColor="#ffffff"
              Shell.ForegroundColor="Turquoise"
@@ -157,7 +156,17 @@ FontAttributes="Bold"
 
     <!-- ÁREA DE DASHBOARD -->
     <FlyoutItem x:Name="DashboardFlyoutItem" Title="Dashboard" Icon="home.png" FlyoutDisplayOptions="AsSingleItem" FlyoutItemIsVisible="False">
-        <ShellContent Title="Inicio" Icon="dashboard.png" ContentTemplate="{DataTemplate local:MainPage}"/>
+        <ShellContent Title="Inicio" Icon="dashboard.png" ContentTemplate="{DataTemplate views:DashboardView}"/>
+    </FlyoutItem>
+
+    <!-- ÁREA DE COMUNICACIÓN -->
+    <FlyoutItem x:Name="ConversacionesFlyoutItem" Title="Conversaciones" Icon="chat.png" FlyoutDisplayOptions="AsSingleItem" FlyoutItemIsVisible="False">
+        <ShellContent Title="Conversaciones" Icon="chat.png" ContentTemplate="{DataTemplate views:ConversacionesView}"/>
+    </FlyoutItem>
+
+    <!-- ÁREA DE TAREAS -->
+    <FlyoutItem x:Name="TareasFlyoutItem" Title="Tareas" Icon="homework.png" FlyoutDisplayOptions="AsSingleItem" FlyoutItemIsVisible="False">
+        <ShellContent Title="Tareas" Icon="homework.png" ContentTemplate="{DataTemplate views:TareasView}"/>
     </FlyoutItem>
 
     <!-- ÁREA DE GESTIÓN DE USUARIOS -->

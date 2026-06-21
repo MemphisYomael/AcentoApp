@@ -5,6 +5,7 @@ using MyStudentsApp.MVVM.Models.SkiaControls;
 using MyStudentsApp.MVVM.ViewModels;
 using MyStudentsApp.MVVM.Views;
 using MyStudentsApp.MVVM.Views.Formularios;
+using MyStudentsApp.Services.Notifications;
 using MyStudentsApp.Services;
 using MyStudentsApp.Shared.Services;
 using SkiaSharp.Views.Maui.Controls.Hosting;
@@ -36,6 +37,9 @@ namespace MyStudentsApp
             builder.Services.AddScoped<ChatService>();
             builder.Services.AddSingleton<IFormFactor, FormFactor>();
             builder.Services.AddScoped<IGestionUsuarioServiceApp, GestionUsuariosServiceApp>();
+            builder.Services.AddSingleton<IOneSignalMauiService, OneSignalMauiService>();
+            builder.Services.AddSingleton<INotificationNavigationService, NotificationNavigationService>();
+            builder.Services.AddScoped<INotificationDeviceService, NotificationDeviceService>();
 
             // *** NUEVO: Servicio de autorización ***
             builder.Services.AddSingleton<AuthorizationService>();
@@ -47,6 +51,9 @@ namespace MyStudentsApp
             builder.Services.AddTransient<CrearProfesorViewModel>();
             builder.Services.AddTransient<ChatZoneViewModel>();
             builder.Services.AddTransient<ListadoDeProfesoresViewModel>();
+            builder.Services.AddTransient<DashboardViewModel>();
+            builder.Services.AddTransient<ConversacionesViewModel>();
+            builder.Services.AddTransient<TareasViewModel>();
 
             // ViewModels de gestión
             builder.Services.AddTransient<GestionProfesoresViewModel>();
@@ -62,6 +69,9 @@ namespace MyStudentsApp
             builder.Services.AddTransient<ListadoEstudiantesProfesores>();
             builder.Services.AddTransient<ListadoDeProfesores>();
             builder.Services.AddTransient<ChatZoneView>();
+            builder.Services.AddTransient<DashboardView>();
+            builder.Services.AddTransient<ConversacionesView>();
+            builder.Services.AddTransient<TareasView>();
 
             // Views de gestión
             builder.Services.AddTransient<GestionEstudiantesView>();
