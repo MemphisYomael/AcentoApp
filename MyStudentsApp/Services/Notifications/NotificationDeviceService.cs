@@ -3,6 +3,7 @@ using System.Net.Http.Headers;
 using System.Text;
 using System.Text.Json;
 using Microsoft.Maui.Storage;
+using MyStudentsApp.Shared.Services;
 
 namespace MyStudentsApp.Services.Notifications;
 
@@ -22,7 +23,7 @@ public sealed class NotificationDeviceService : INotificationDeviceService
         _oneSignalMauiService = oneSignalMauiService;
         _httpClient = new HttpClient
         {
-            BaseAddress = new Uri("https://localhost:7224/api/notificaciones/")
+            BaseAddress = new Uri($"{ApiEndpoints.BaseUrl}/api/notificaciones/")
         };
     }
 

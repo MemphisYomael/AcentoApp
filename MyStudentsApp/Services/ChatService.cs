@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using MyStudentsApp.Shared.DTOShared;
 using PropertyChanged;
 using Microsoft.AspNetCore.SignalR.Client;
+using MyStudentsApp.Shared.Services;
 
 namespace MyStudentsApp.Services
 {
@@ -36,7 +37,7 @@ namespace MyStudentsApp.Services
                 Debug.WriteLine("[CHAT_SERVICE] 🔌 Configurando nueva conexión SignalR");
 
                 _connection = new HubConnectionBuilder()
-                    .WithUrl("https://localhost:7224/hubs/chat", options =>
+                    .WithUrl($"{ApiEndpoints.BaseUrl}/hubs/chat", options =>
                     {
                         options.AccessTokenProvider = async () =>
                         {

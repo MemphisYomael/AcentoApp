@@ -9,6 +9,7 @@ using System.Net.Http.Headers;
 using System.Text;
 using System.Text.Json;
 using System.Threading.Tasks;
+using MyStudentsApp.Shared.Services;
 
 namespace MyStudentsApp.Services
 {
@@ -25,7 +26,7 @@ namespace MyStudentsApp.Services
                 PropertyNameCaseInsensitive = true, // Es una buena práctica para la deserialización
                 WriteIndented = true
             };
-            _httpClient.BaseAddress = new Uri("https://localhost:7224/api/GestionUsuarios/");
+            _httpClient.BaseAddress = new Uri($"{ApiEndpoints.BaseUrl}/api/GestionUsuarios/");
         }
 
         /// <summary>
