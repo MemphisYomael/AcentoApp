@@ -1,4 +1,5 @@
 using System.Threading.Tasks;
+using System.Diagnostics;
 using System.Windows.Input;
 using CommunityToolkit.Maui.Markup;
 using CommunityToolkit.Maui.Views;
@@ -8,18 +9,44 @@ using MyStudentsApp.Shared.DTOShared;
 
 namespace MyStudentsApp.MVVM.Views;
 
+[QueryProperty(nameof(Nombre), "nombre")]
+[QueryProperty(nameof(UsuarioId), "usuarioId")]
 public partial class ChatZoneView : ContentPage
 {
-    private string _nombrePersona { get; set; }
-    private string _usuarioId { get; set; }
+    private string _nombrePersona;
+    private string _usuarioId;
+    private ChatZoneViewModel _viewModel;
+    private Label _headerLabel;
+
+    public string Nombre
+    {
+        get => _nombrePersona;
+        set
+        {
+            _nombrePersona = value;
+            Title = _nombrePersona;
+            if (_headerLabel != null)
+                _headerLabel.Text = _nombrePersona;
+            OnPropertyChanged();
+        }
+    }
+
+    public string UsuarioId
+    {
+        get => _usuarioId;
+        set
+        {
+            _usuarioId = value;
+            OnPropertyChanged();
+        }
+    }
+
     public ICommand EnviarMensajeCommand { get; set; }
 
-    public ChatZoneView(string nombrePersona, string usuarioId, ChatZoneViewModel zoneViewModel)
+    public ChatZoneView(ChatZoneViewModel zoneViewModel)
     {
-        _usuarioId = usuarioId;
-        Title = $"{nombrePersona}";
-        _nombrePersona = nombrePersona;
-        BindingContext = zoneViewModel;
+        _viewModel = zoneViewModel;
+        BindingContext = _viewModel;
         EnviarMensajeCommand = new Command(async () => await Enviar());
 
         Background = new LinearGradientBrush
@@ -32,6 +59,16 @@ public partial class ChatZoneView : ContentPage
             }
         };
         InitializeComponent();
+
+        _headerLabel = new Label
+        {
+            Text = _nombrePersona ?? "Chat",
+            FontSize = 18,
+            FontAttributes = FontAttributes.Bold,
+            TextColor = Colors.Black,
+            VerticalOptions = LayoutOptions.Center,
+            HorizontalOptions = LayoutOptions.Center
+        };
 
         Content = new Grid
         {
@@ -49,11 +86,11 @@ public partial class ChatZoneView : ContentPage
             },
             Children =
             {
-                // Barra superior con avatar y nombre
+                // Barra superior con nombre
                 new Border
                 {
                     BackgroundColor = Colors.White,
-                    Padding = 15,
+                    Padding = 12,
                     StrokeShape = new RoundRectangle
                     {
                         CornerRadius = new CornerRadius(10)
@@ -63,28 +100,35 @@ public partial class ChatZoneView : ContentPage
                         ColumnDefinitions = new ColumnDefinitionCollection
                         {
                             new ColumnDefinition(GridLength.Auto),
-                            new ColumnDefinition(new GridLength(1, GridUnitType.Star))
+                            new ColumnDefinition(GridLength.Star)
+                        },
+                        RowDefinitions = new RowDefinitionCollection
+                        {
+                            new RowDefinition(GridLength.Auto),
+                            new RowDefinition(GridLength.Auto)
                         },
                         Children =
                         {
-                            new AvatarView
+                            new Button
                             {
-                                Text = _nombrePersona[0].ToString(),
-                                BackgroundColor = Color.FromArgb("#48c1ec"),
-                                TextColor = Colors.White,
-                                WidthRequest = 40,
-                                HeightRequest = 40,
-                                FontSize = 16
-                            }.Column(0),
+                                Text = "‹",
+                                FontSize = 22,
+                                WidthRequest = 42,
+                                HeightRequest = 38,
+                                Padding = 0,
+                                BackgroundColor = Color.FromArgb("#EAF2F8"),
+                                TextColor = Colors.Black,
+                                CornerRadius = 8,
+                                Command = new Command(async () => await Shell.Current.GoToAsync(".."))
+                            }.Row(0).Column(0).RowSpan(2),
+                            _headerLabel.Row(0).Column(1),
                             new Label
                             {
-                                Text = _nombrePersona,
-                                FontSize = 18,
-                                FontAttributes = FontAttributes.Bold,
-                                TextColor = Colors.Black,
-                                VerticalOptions = LayoutOptions.Center,
-                                Margin = new Thickness(15, 0, 0, 0)
-                            }.Column(1)
+                                FontSize = 11,
+                                TextColor = Color.FromArgb("#1F7A8C"),
+                                HorizontalOptions = LayoutOptions.Center
+                            }.Bind(Label.TextProperty, nameof(ChatZoneViewModel.StatusMessage))
+                             .Row(1).Column(1)
                         }
                     }
                 }.Row(0),
@@ -92,6 +136,13 @@ public partial class ChatZoneView : ContentPage
                 // CollectionView para mensajes
                 new CollectionView
                 {
+                    EmptyView = new Label
+                    {
+                        Text = "Aún no hay mensajes.",
+                        TextColor = Colors.White,
+                        HorizontalOptions = LayoutOptions.Center,
+                        VerticalOptions = LayoutOptions.Center
+                    },
                     ItemTemplate = new DataTemplate(() =>
                     {
                         var border = new Border()
@@ -167,16 +218,29 @@ public partial class ChatZoneView : ContentPage
     protected override void OnAppearing()
     {
         base.OnAppearing();
-        var bc = BindingContext as ChatZoneViewModel;
+        
+        if (!string.IsNullOrEmpty(_usuarioId))
+        {
+            _viewModel?.TraerMensajesAsync(_usuarioId);
+        }
+    }
 
-        bc.TraerMensajesAsync(_usuarioId);
+    protected override void OnDisappearing()
+    {
+        base.OnDisappearing();
+        
+        // IMPORTANTE: Limpiar eventos cuando se sale del chat
+        _viewModel?.Cleanup();
     }
 
     private async Task Enviar()
     {
-        var bc = BindingContext as ChatZoneViewModel;
-        await bc.EnviarMensajeAsync(_usuarioId);
+        if (!string.IsNullOrEmpty(_usuarioId))
+        {
+            await _viewModel.EnviarMensajeAsync(_usuarioId);
+        }
     }
+
     private View renderizarMensage()
     {
         return new Grid
@@ -205,7 +269,7 @@ public partial class ChatZoneView : ContentPage
                 }.Bind(Label.TextProperty, "mensaje")
                 .Bind(Label.HorizontalOptionsProperty, "senderNombre", convert: (string nombre) =>
                  {
-                            if (nombre != null && _nombrePersona.Contains(nombre)) return LayoutOptions.End;
+                            if (nombre != null && !string.IsNullOrEmpty(_nombrePersona) && _nombrePersona.Contains(nombre)) return LayoutOptions.End;
                             return LayoutOptions.Start;
                  })
                  .Row(1).Column(0).ColumnSpan(2),

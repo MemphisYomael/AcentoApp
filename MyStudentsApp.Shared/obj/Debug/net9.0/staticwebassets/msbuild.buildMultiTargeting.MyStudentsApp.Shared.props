@@ -1,3 +1,0 @@
-﻿<Project>
-  <Import Project="..\build\MyStudentsApp.Shared.props" />
-</Project>

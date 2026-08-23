@@ -1,0 +1,164 @@
+# Directorios de compilación de Visual Studio
+[Bb]in/
+[Oo]bj/
+
+# Archivos de usuario de Visual Studio
+*.user
+*.userosscache
+*.sln.docstates
+
+# Archivos de proyecto de usuario
+*.suo
+*.cache
+*.vbw
+
+# Resultados de pruebas
+[Tt]est[Rr]esult*/
+[Bb]uild[Ll]og.*
+
+# NUnit
+*.VisualState.xml
+TestResult.xml
+nunit-*.xml
+
+# Build Results
+[Dd]ebug*/
+[Dd]ebugPublic/
+[Rr]elease*/
+[Rr]eleases/
+x64/
+x86/
+[Aa][Rr][Mm]/
+[Aa][Rr][Mm]64/
+bld/
+[Bb]in/
+[Oo]bj/
+[Ll]og/
+[Ll]ogs/
+
+# Visual Studio 2015/2017 cache/options directory
+.vs/
+# Uncomment if you have tasks that create the project's static files in wwwroot
+#wwwroot/
+
+# Visual Studio 2017 auto generated files
+Generated\ Files/
+
+# MSTest test Results
+[Tt]est[Rr]esult*/
+[Bb]uild[Ll]og.*
+
+# NUnit
+*.VisualState.xml
+TestResult.xml
+nunit-*.xml
+
+# Build Results of an ATL Project
+[Dd]ebugPS/
+[Rr]eleasePS/
+dlldata.c
+
+# .NET Core
+project.lock.json
+project.fragment.lock.json
+artifacts/
+
+# MAUI específico
+# Archivos de recursos de Android
+Resources/**/*.png
+!Resources/**/*.png.meta
+
+# Archivos de firma/keystores
+*.keystore
+*.jks
+*.p12
+*.pfx
+
+# Archivos de configuración específicos del entorno
+appsettings.*.json
+appsettings.*.Development.json
+*.env
+.env.local
+.env.development.local
+
+# Archivos de publicación
+publish/
+*.pubxml
+
+# Rider IDE
+.idea/
+*.sln.iml
+
+# VS Code
+.vscode/
+!.vscode/settings.json
+!.vscode/tasks.json
+!.vscode/launch.json
+!.vscode/extensions.json
+
+# Windows
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+
+# macOS
+.DS_Store
+._*
+
+# Linux
+*~
+
+# Archivos temporales
+*.tmp
+*.temp
+
+# Paquetes NuGet
+# Se recomienda NO incluir /packages/ ya que es mejor restaurar paquetes
+# Si necesitas incluir paquetes, descomenta las siguientes líneas
+#packages/
+#[Nn]u[Gg]et/
+#*.nupkg
+#Nuget.exe
+#packages-*
+
+# .NET Core global tools
+.dotnet/tools/
+
+# JetBrains Rider
+*.sln.iml
+
+# Archivos de backup
+*.backup
+*.bak
+
+# Archivos de resguardo de VS
+*.vssscc
+*.vspscc
+
+# Archivos de migración de EF Core (considerar si deben versionarse)
+#Migrations/
+
+# Archivos de certificados locales de desarrollo
+local.settings.json
+
+# Configuraciones específicas de iOS (MAUI)
+*.mobileprovision
+*.p12
+*.cer
+
+# Archivos generados por MAUI
+**/Resources/Designer/*.cs
+**/Properties/launchSettings.json
+
+# Azure Functions
+local.settings*.json
+
+# Coverlet
+coverage*.json
+coverage*.xml
+coverage*.info
+
+# Excepciones específicas
+!**/*.[Cc]ache/
+!**/Resources/Designer/*.resx
+!**/Properties/AssemblyInfo.cs

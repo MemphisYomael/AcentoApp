@@ -1,7 +1,0 @@
-wwwroot\app.css
-wwwroot\bootstrap\bootstrap.min.css
-wwwroot\bootstrap\bootstrap.min.css.map
-wwwroot\favicon.png
-C:\Users\Usuario\Desktop\personal\MyStudentsApp\MyStudentsApp.Shared\wwwroot\app.css
-C:\Users\Usuario\Desktop\personal\MyStudentsApp\MyStudentsApp.Shared\wwwroot\bootstrap\bootstrap.min.css
-C:\Users\Usuario\Desktop\personal\MyStudentsApp\MyStudentsApp.Shared\wwwroot\bootstrap\bootstrap.min.css.map

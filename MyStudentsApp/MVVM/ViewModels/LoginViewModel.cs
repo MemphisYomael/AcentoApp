@@ -9,6 +9,7 @@ using CommunityToolkit.Maui.Alerts;
 using Microsoft.Maui.Storage;
 using MyStudentsApp.DbContext;
 using MyStudentsApp.Services;
+using MyStudentsApp.Services.Notifications;
 using MyStudentsApp.Shared.DTOShared;
 using PropertyChanged;
 
@@ -18,18 +19,29 @@ namespace MyStudentsApp.MVVM.ViewModels
     public class LoginViewModel
     {
         private readonly IGestionUsuarioServiceApp _gestionUsuariosService;
+        private readonly AuthorizationService _authService;
+        private readonly IOneSignalMauiService _oneSignalMauiService;
+        private readonly INotificationDeviceService _notificationDeviceService;
+
         public LoginRequestDTO GuardarSesionModel { get; set; } = new();
 
         public ICommand loginCommand { get; set; }
 
-        public LoginViewModel(IGestionUsuarioServiceApp gestion)    
+        public LoginViewModel(
+            IGestionUsuarioServiceApp gestion,
+            AuthorizationService authService,
+            IOneSignalMauiService oneSignalMauiService,
+            INotificationDeviceService notificationDeviceService)
         {
+            _gestionUsuariosService = gestion;
+            _authService = authService;
+            _oneSignalMauiService = oneSignalMauiService;
+            _notificationDeviceService = notificationDeviceService;
+
             loginCommand = new Command(async () =>
             {
                 await Login();
             });
-            _gestionUsuariosService = gestion;
-
 
             PreferencesInitialize();
         }
@@ -61,7 +73,19 @@ namespace MyStudentsApp.MVVM.ViewModels
 
             if (await _gestionUsuariosService.Login(GuardarSesionModel))
             {
-               
+                // *** NUEVO: Actualizar usuario actual en el servicio de autorización ***
+                await _authService.UpdateCurrentUser(_gestionUsuariosService);
+
+                var usuarioId = _authService.UsuarioActual?.Id ?? Preferences.Get("userId", string.Empty);
+                if (!string.IsNullOrWhiteSpace(usuarioId))
+                {
+                    await _oneSignalMauiService.LoginAsync(usuarioId);
+                    await _oneSignalMauiService.RequestPermissionAsync();
+                    await _notificationDeviceService.RegistrarDispositivoAsync(usuarioId);
+                }
+
+                // *** NUEVO: Navegar al Dashboard después del login exitoso ***
+                //await Shell.Current.GoToAsync("//DashboardFlyoutItem");
 #if !WINDOWS
                 var snackbar = Snackbar.Make("Iniciaste Sesion Con Exito!!", actionButtonText: "OK");
                 snackbar.VisualOptions.TextColor = Colors.White;
@@ -69,8 +93,7 @@ namespace MyStudentsApp.MVVM.ViewModels
                 snackbar.VisualOptions.BackgroundColor = Colors.Green;
                 await snackbar.Show();
 #else
-await Application.Current.MainPage.DisplayAlert("Estatus", "Iniciaste Sesion Con Exito!!", "OK");
-
+                await Application.Current.MainPage.DisplayAlert("Estatus", "Iniciaste Sesion Con Exito!!", "OK");
 #endif
             }
             else
@@ -83,8 +106,7 @@ await Application.Current.MainPage.DisplayAlert("Estatus", "Iniciaste Sesion Con
                 snackbar.VisualOptions.BackgroundColor = Colors.Red;
                 await snackbar.Show();
 #else
-await Application.Current.MainPage.DisplayAlert("Estatus", "Por favor, refiva tus credenciales!", "OK");
-
+                await Application.Current.MainPage.DisplayAlert("Estatus", "Por favor, verifica tus credenciales!", "OK");
 #endif
 
             }

@@ -28,14 +28,15 @@ else
 
 app.UseHttpsRedirection();
 
-app.UseStaticFiles();
 app.UseAntiforgery();
 
+app.MapStaticAssets();
 app.MapRazorComponents<App>()
     .AddInteractiveServerRenderMode()
     .AddInteractiveWebAssemblyRenderMode()
     .AddAdditionalAssemblies(
         typeof(MyStudentsApp.Shared._Imports).Assembly,
-        typeof(MyStudentsApp.Web.Client._Imports).Assembly);
+        typeof(MyStudentsApp.Web.Client._Imports).Assembly)
+    .WithStaticAssets();
 
 app.Run();

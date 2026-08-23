@@ -1,4 +1,0 @@
-wwwroot\app.css
-wwwroot\index.html
-C:\Users\Usuario\Desktop\personal\MyStudentsApp\MyStudentsApp\wwwroot\app.css
-C:\Users\Usuario\Desktop\personal\MyStudentsApp\MyStudentsApp\wwwroot\index.html

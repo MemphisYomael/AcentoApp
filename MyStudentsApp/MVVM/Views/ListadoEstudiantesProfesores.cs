@@ -22,7 +22,7 @@ public class ListadoEstudiantesProfesores : ContentPage
         VerticalOptions = LayoutOptions.Center,
     };
 
-    public ListadoEstudiantesProfesores(ListadoDeEstudiantesViewModel viewModel, ChatZoneViewModel chatZoneView)
+    public ListadoEstudiantesProfesores(ListadoDeEstudiantesViewModel viewModel)
 	{
         Title = "Listado de Estudiantes";
         searchBar.TextChanged += (sender, e) =>
@@ -118,11 +118,17 @@ public class ListadoEstudiantesProfesores : ContentPage
                         {
                             IconImageSource = "chat.png",
                             //BackgroundColor = Color.FromArgb("#294f52"),
-                            Command = new Command((object student) =>
+                            Command = new Command(async (object student) =>
                             {
                                 if (student is EstudianteResponseDTO studentDto)
                                 {
-                                    Navigation.PushAsync(new ChatZoneView(studentDto.nombres + " " + studentDto.apellidos, studentDto.usuarioId! ,chatZoneView));
+                                    // Usar navegaci√≥n Shell en lugar de Navigation.PushAsync
+                                    await Shell.Current.GoToAsync("chatZone", 
+                                        new Dictionary<string, object>
+                                        {
+                                            ["nombre"] = studentDto.nombres + " " + studentDto.apellidos,
+                                            ["usuarioId"] = studentDto.usuarioId!
+                                        });
                                 }
                             }),
                             CommandParameter = new Binding("."),
@@ -171,44 +177,12 @@ public class ListadoEstudiantesProfesores : ContentPage
 		};
 	}
 
-    protected override void OnAppearing()
+    protected override async void OnAppearing()
     {
         if (BindingContext is ListadoDeEstudiantesViewModel viewModel)
         {
-
-            viewModel.buscar = new Command((SearchText) =>
-            {
-                string busquedaTexto = (string)SearchText;
-
-                if (string.IsNullOrEmpty(busquedaTexto))
-                {
-                    viewModel.EstudiantesFiltrados = viewModel.Estudiantes;
-                    return;
-                }
-                try
-                {
-                    var listaFiltrada = viewModel.Estudiantes
-                     .Where(x =>
-                         (x?.nombres ?? string.Empty).Contains(busquedaTexto, StringComparison.OrdinalIgnoreCase) ||
-                         (x?.apellidos ?? string.Empty).Contains(busquedaTexto, StringComparison.OrdinalIgnoreCase) ||
-                         (x?.curso ?? string.Empty).Contains(busquedaTexto, StringComparison.OrdinalIgnoreCase)
-                     )
-                     .ToList();
-
-
-                    viewModel.EstudiantesFiltrados = listaFiltrada;
-                }
-                catch (Exception ex)
-                {
-                    viewModel.EstudiantesFiltrados = new List<EstudianteResponseDTO>();
-                }
-            });
             viewModel.titulo = "Listado de estudiantes";
-
-            viewModel.ObtenerEstudiantes();
-
-            viewModel.EstudiantesFiltrados = viewModel.Estudiantes;
-            // LÛgica adicional si es necesaria
+            await viewModel.ObtenerEstudiantes();
         }
         base.OnAppearing();
     }

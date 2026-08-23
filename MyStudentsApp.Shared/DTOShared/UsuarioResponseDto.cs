@@ -16,6 +16,6 @@ namespace MyStudentsApp.Shared.DTOShared
         public string? UserName { get; set; }
         public string? Email { get; set; }
 
-
+        public ProfesorResponseDTO? Profesor { get; set; }
     }
 }

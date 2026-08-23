@@ -6,7 +6,6 @@
              xmlns:formularios="clr-namespace:MyStudentsApp.MVVM.Views.Formularios"
              x:Class="MyStudentsApp.AppMainShell"   
              Title="HI Teacher"     
-             FlyoutIcon="menu_dark.png"
              FlyoutVerticalScrollMode="Auto"
              BackgroundColor="#ffffff"
              Shell.ForegroundColor="Turquoise"
@@ -21,7 +20,7 @@
 
             <Label 
                 x:Name="titulo"
-                Text="HiTeacher" 
+                Text="Acento Piano Music" 
                    Grid.Column="0"
                    HorizontalOptions="Start" 
                    VerticalOptions="Center" 
@@ -50,8 +49,8 @@ FontAttributes="Bold"
             <Setter Property="Shell.TabBarUnselectedColor" Value="#000000"/>
         </Style>
     </Shell.Resources>
-    
-    
+
+
     <!--IF WINDOWS FlyoutBehavior="Locked" -->
     <!--FlyoutBackgroundImage=""-->
     <!--FlyoutBackgroundImageAspect="AspectFill"-->
@@ -69,34 +68,34 @@ FontAttributes="Bold"
             <GradientStop Offset="0.6" Color="#d8bfd8"></GradientStop>
         </LinearGradientBrush>
     </Shell.FlyoutBackdrop>-->
-    <Shell.FlyoutHeader>  
-        <Grid BackgroundColor="Black" HeightRequest="200">  
+    <Shell.FlyoutHeader>
+        <Grid BackgroundColor="Black" HeightRequest="200">
             <Image Source="imgbg.png"   
                    HorizontalOptions="Fill"  
                    VerticalOptions="Fill"  
                    Aspect="AspectFill"
                    Opacity="0.7"  
-                 />  
+                 />
             <VerticalStackLayout HorizontalOptions="Center" VerticalOptions="Center">
-                <Label Text="👋 HiTeacher"  
+                <Label Text="👋 Acento "  
              HorizontalOptions="Center"  
              VerticalOptions="Center"  
              FontSize="24"  
              FontFamily="text"
              TextColor="White"  
-             FontAttributes="Bold"/>  
+             FontAttributes="Bold"/>
 
-                <Label Text="Para una comunicacion efectiva"  
+                <Label Text="Piano Music"  
                   HorizontalOptions="Center"  
                   VerticalOptions="End"  
                   FontSize="12"  
                   TextColor="White" 
                   FontFamily="text" 
-                />    
-            </VerticalStackLayout>  
-        </Grid>  
+                />
+            </VerticalStackLayout>
+        </Grid>
     </Shell.FlyoutHeader>
-    
+
     <Shell.FlyoutFooter>
         <Grid BackgroundColor="White" HeightRequest="60"  Padding="10">
             <Grid.RowDefinitions>
@@ -149,63 +148,46 @@ FontAttributes="Bold"
             </HorizontalStackLayout>
         </DataTemplate>
     </Shell.ItemTemplate>
-    <FlyoutItem Title="Aplication" Icon="home.png" FlyoutDisplayOptions="AsMultipleItems">  
-        <Tab Title="DashBoard" Icon="dashboard.png">  
-            <ShellContent Icon="chat.png" Title="Estudiantes" ContentTemplate="{DataTemplate views:ListadoEstudiantesProfesores }">  
-            </ShellContent>  
-            <ShellContent Icon="settings.png" Title="Gestion" ContentTemplate="{DataTemplate local:MainPage}">  
-            </ShellContent>  
-        </Tab>  
 
-        <Tab Title="Aplication" Icon="home.png" >  
-            <ShellContent Icon="login.png" Title="Login" ContentTemplate="{DataTemplate views:LoginView}">  
-            </ShellContent>  
-            
-        </Tab>  
-    </FlyoutItem>  
-    
-      <FlyoutItem Title="Aplication" Icon="home.png" FlyoutItemIsVisible="False">  
-      <Tab Title="DashBoard" Icon="dashboard.png">  
-          <ShellContent Icon="chat.png" Title="Estudiantes" ContentTemplate="{DataTemplate views:ListadoEstudiantesProfesores }">  
-          </ShellContent>  
-          <ShellContent Icon="settings.png" Title="Gestion" ContentTemplate="{DataTemplate local:MainPage}">  
-          </ShellContent>  
-      </Tab>  
-
-      <Tab Title="Aplication" Icon="home.png" >  
-          <ShellContent Icon="login.png" Title="Login" ContentTemplate="{DataTemplate views:LoginView}">  
-          </ShellContent>  
-          <ShellContent Icon=".png" Title="BETA Tests" ContentTemplate="{DataTemplate views:vista }">  
-          </ShellContent>  
-      </Tab>  
-  </FlyoutItem>  
-
-    <FlyoutItem Title="Gestion de Usuarios" Icon="home.png" FlyoutDisplayOptions="AsSingleItem">  
-        <!--<Tab Title="DashBoard" Icon="dashboard.png">-->
-            <ShellContent Icon="settings.png" Title="Crear Estudiantes" ContentTemplate="{DataTemplate formularios:CrearEstudianteView}">
-            </ShellContent>
-            <ShellContent Icon="settings.png" Title="Crear Profesores" ContentTemplate="{DataTemplate formularios:CrearProfesorView}">
-            </ShellContent>
-        <!--</Tab>-->  
+    <!-- ÁREA DE LOGIN (Oculta cuando está logueado) -->
+    <FlyoutItem x:Name="LoginFlyoutItem" Title="Acceso" Icon="login.png" FlyoutItemIsVisible="True">
+        <ShellContent Title="Login" Icon="login.png" ContentTemplate="{DataTemplate views:LoginView}"/>
     </FlyoutItem>
 
-    <ShellContent Icon="homework.png" Title="WEB VIEW" ContentTemplate="{DataTemplate views:vista }">
-    </ShellContent>
-    <!--<FlyoutItem Title="Crear" Icon="home.png">  
-        <Tab Title="DashBoard" Icon="dashboard.png">
-           
-        </Tab>  
+    <!-- ÁREA DE DASHBOARD -->
+    <FlyoutItem x:Name="DashboardFlyoutItem" Title="Dashboard" Icon="home.png" FlyoutDisplayOptions="AsSingleItem" FlyoutItemIsVisible="False">
+        <ShellContent Title="Inicio" Icon="dashboard.png" ContentTemplate="{DataTemplate views:DashboardView}"/>
+    </FlyoutItem>
 
-        --><!--<Tab Title="Aplication" Icon="home.png">  
-            <ShellContent Icon="login.png" Title="Login" ContentTemplate="{DataTemplate views:LoginView}">  
-            </ShellContent>  
-            <ShellContent Icon=".png" Title="BETA Tests" ContentTemplate="{DataTemplate views:vista }">  
-            </ShellContent>  
-        </Tab>--><!--  
-    </FlyoutItem>-->
+    <!-- ÁREA DE COMUNICACIÓN -->
+    <FlyoutItem x:Name="ConversacionesFlyoutItem" Title="Conversaciones" Icon="chat.png" FlyoutDisplayOptions="AsSingleItem" FlyoutItemIsVisible="False">
+        <ShellContent Title="Conversaciones" Icon="chat.png" ContentTemplate="{DataTemplate views:ConversacionesView}"/>
+    </FlyoutItem>
 
-    <MenuItem Text="Help" IconImageSource="tests.png" Clicked="MenuItem_Clicked" />
-    <MenuItem Text="Logout"  IconImageSource="tests.png" Clicked="MenuItem_Clicked" />
+    <!-- ÁREA DE TAREAS -->
+    <FlyoutItem x:Name="TareasFlyoutItem" Title="Tareas" Icon="homework.png" FlyoutDisplayOptions="AsSingleItem" FlyoutItemIsVisible="False">
+        <ShellContent Title="Tareas" Icon="homework.png" ContentTemplate="{DataTemplate views:TareasView}"/>
+    </FlyoutItem>
+
+    <!-- ÁREA DE GESTIÓN DE USUARIOS -->
+    <FlyoutItem x:Name="GestionUsuariosFlyoutItem" Title="Gestión de Usuarios" Icon="settings.png" FlyoutDisplayOptions="AsMultipleItems">
+        <Tab x:Name="EstudiantesTab" Title="Estudiantes" Icon="chat.png">
+            <ShellContent x:Name="ListadoEstudiantesContent" Title="Listado de Estudiantes" ContentTemplate="{DataTemplate views:ListadoEstudiantesProfesores}"/>
+            <ShellContent x:Name="CrearEstudianteContent" Title="Crear Estudiante" ContentTemplate="{DataTemplate formularios:CrearEstudianteView}"/>
+            <ShellContent x:Name="GestionEstudiantesContent" Title="Gestionar Estudiantes" ContentTemplate="{DataTemplate views:GestionEstudiantesView}"/>
+        </Tab>
+        <Tab x:Name="ProfesoresTab" Title="Profesores" Icon="settings.png">
+            <ShellContent x:Name="ListadoProfesoresContent" Title="Listado de Profesores" ContentTemplate="{DataTemplate views:ListadoDeProfesores}"/>
+            <ShellContent x:Name="CrearProfesorContent" Title="Crear Profesor" ContentTemplate="{DataTemplate formularios:CrearProfesorView}"/>
+            <ShellContent x:Name="GestionProfesoresContent" Title="Gestionar Profesores" ContentTemplate="{DataTemplate views:GestionProfesoresView}"/>
+        </Tab>
+    </FlyoutItem>
+
+    <!-- ÁREA DE CONFIGURACIÓN -->
+    <FlyoutItem x:Name="ConfiguracionFlyoutItem" Title="Configuración" Icon="settings.png" FlyoutDisplayOptions="AsMultipleItems">
+        <ShellContent Title="Crear Curso" Icon="home.png" ContentTemplate="{DataTemplate formularios:CrearCursoView}"/>
+        <ShellContent Title="Vinculaciones" Icon="settings.png" ContentTemplate="{DataTemplate views:VinculacionesView}"/>
+    </FlyoutItem>
 
     <Shell.MenuItemTemplate>
         <DataTemplate>
@@ -233,9 +215,5 @@ FontAttributes="Bold"
             </HorizontalStackLayout>
         </DataTemplate>
     </Shell.MenuItemTemplate>
-
-
-   
-
 
 </Shell>

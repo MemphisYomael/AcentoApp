@@ -1,4 +1,0 @@
-wwwroot\app.css
-wwwroot\index.html
-M:\MyAcento\MyStudentsApp\MyStudentsApp\wwwroot\index.html
-M:\MyAcento\MyStudentsApp\MyStudentsApp\wwwroot\app.css

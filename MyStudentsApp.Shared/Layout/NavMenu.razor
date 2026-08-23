@@ -14,6 +14,48 @@
             </NavLink>
         </div>
 
+        <!-- Sección para Profesores -->
+        <div class="nav-item px-3">
+            <div class="nav-section-title text-white-50 small mt-3 mb-2">
+                <i class="fas fa-chalkboard-teacher me-2"></i>
+                Profesores
+            </div>
+        </div>
+
+        <div class="nav-item px-3">
+            <NavLink class="nav-link" href="tareas-profesor">
+                <span class="fas fa-tasks" aria-hidden="true"></span> Mis Tareas
+            </NavLink>
+        </div>
+
+        <div class="nav-item px-3">
+            <NavLink class="nav-link" href="crear-tarea">
+                <span class="fas fa-plus-circle" aria-hidden="true"></span> Crear Tarea
+            </NavLink>
+        </div>
+
+        <!-- Sección para Estudiantes -->
+        <div class="nav-item px-3">
+            <div class="nav-section-title text-white-50 small mt-3 mb-2">
+                <i class="fas fa-user-graduate me-2"></i>
+                Estudiantes
+            </div>
+        </div>
+
+        <div class="nav-item px-3">
+            <NavLink class="nav-link" href="mis-tareas">
+                <span class="fas fa-clipboard-list" aria-hidden="true"></span> Mis Tareas
+            </NavLink>
+        </div>
+
+        <!-- Otras opciones -->
+        <div class="nav-item px-3">
+            <div class="nav-section-title text-white-50 small mt-3 mb-2">
+                <i class="fas fa-cog me-2"></i>
+                Otros
+            </div>
+        </div>
+
         <div class="nav-item px-3">
             <NavLink class="nav-link" href="counter">
                 <span class="bi bi-plus-square-fill-nav-menu" aria-hidden="true"></span> Counter
@@ -28,3 +70,22 @@
     </nav>
 </div>
 
+<style>
+    .nav-section-title {
+        padding-left: 0.5rem;
+        font-weight: 600;
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+    }
+
+    .nav-link {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+    }
+
+    .nav-link span {
+        width: 20px;
+        text-align: center;
+    }
+</style>

@@ -81,7 +81,7 @@
         {
             WriteIndented = true
         };
-        _httpClient.BaseAddress = new Uri("https://localhost:7224/api/GestionUsuarios/");
+        _httpClient.BaseAddress = new Uri($"{ApiEndpoints.BaseUrl}/api/GestionUsuarios/");
         isLoading = false; // Marcar como cargado
         directores = await obtenerDirectores();
 

@@ -1,7 +1,0 @@
-wwwroot\app.css
-wwwroot\bootstrap\bootstrap.min.css
-wwwroot\bootstrap\bootstrap.min.css.map
-wwwroot\favicon.png
-M:\MyAcento\MyStudentsApp\MyStudentsApp.Shared\wwwroot\app.css
-M:\MyAcento\MyStudentsApp\MyStudentsApp.Shared\wwwroot\bootstrap\bootstrap.min.css
-M:\MyAcento\MyStudentsApp\MyStudentsApp.Shared\wwwroot\bootstrap\bootstrap.min.css.map
